@@ -3,13 +3,13 @@ import React from "react";
 
 type FooterProps = {
   title: string;
-  Body_BackgroundUrl: string;
+  background: string;
 };
 
-const Footer: React.FC <FooterProps>= ({ Body_BackgroundUrl  }) => {
+const Footer: React.FC <FooterProps>= ({ background  }) => {
   return (
     <footer  className=" text-white py-10 px-6 shadow-md relative">
-      <img src={ Body_BackgroundUrl  } alt="BackgroundUrl" />
+      <img src={ background  } alt="BackgroundUrl" />
       <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
         {/* فرم تماس */}
         <div className="bg-white p-6 rounded-lg shadow-lg text-gray-800">

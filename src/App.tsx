@@ -16,14 +16,11 @@ function App() {
    
  <Router>
    <Header title={'Borhan'} logoUrl={'logo.png'} />
-   <Footer Body_BackgroundUrl={'Body_Background.png'} title={'test'} />
-     </Router>
+   <Footer background={'background.jpg'} title={'test'} />
+ </Router>
 
 
-</>
-
-
- 
+</> 
   );
 }
 
