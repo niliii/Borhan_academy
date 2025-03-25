@@ -1,16 +1,17 @@
 import React from "react";
 
-
 type FooterProps = {
   title: string;
   background: string;
 };
 
-const Footer: React.FC <FooterProps>= ({ background  }) => {
+const Footer: React.FC<FooterProps> = ({ background }) => {
   return (
-    <footer  className=" text-white py-10 px-6 shadow-md relative">
-      <img src={ background  } alt="BackgroundUrl" />
-      <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
+    <footer
+      className="text-white py-10 px-6 shadow-md relative bg-cover bg-center"
+      style={{ backgroundImage: `url(${background})` }}
+    >
+      <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 items-start bg-black bg-opacity-50 p-6 rounded-lg">
         {/* فرم تماس */}
         <div className="bg-white p-6 rounded-lg shadow-lg text-gray-800">
           <h3 className="text-xl font-semibold mb-4 text-center">با ما در ارتباط باشید</h3>
@@ -49,7 +50,7 @@ const Footer: React.FC <FooterProps>= ({ background  }) => {
       </div>
       
       {/* کپی‌رایت */}
-      <div className="text-center text-sm mt-8 border-t border-white pt-4">
+      <div className="text-center text-sm mt-8 border-t border-white pt-4 bg-black bg-opacity-50 p-2 rounded-lg">
         © کلیه حقوق مادی و معنوی وبسایت متعلق به گروه آموزشی برهان می‌باشد.
       </div>
     </footer>

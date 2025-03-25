@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Route,  } from 'react-router-dom';
 //  import Footer from './components/Footer';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
+import Home from './Pages/Home';
 //  import AdminDashboard from './components/AdminPanel/AdminDashboard';
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
    
  <Router>
    <Header title={'Borhan'} logoUrl={'logo.png'} />
+   <Home/>
    <Footer background={'background.jpg'} title={'test'} />
  </Router>
 
