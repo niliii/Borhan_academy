@@ -505,6 +505,137 @@ const HonorsSlider = () => {
     </div>
   );
 };
+const HonorsSlider2 = () => {
+  const [index, setIndex] = useState(0);
+  const intervalTime = 4000;
+  const sliderRef = useRef(null);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIndex((prevIndex) => (prevIndex + 1) % data.length);
+
+      if (sliderRef.current) {
+        // sliderRef.current.scrollLeft += 300;
+      }
+    }, intervalTime);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <div className="relative w-full overflow-hidden bg-gray-100 p-6 rounded-lg">
+      <h2 className="text-2xl font-bold text-center mb-6">تالار افتخارات</h2>
+      <div className="flex justify-center items-center">
+        <div
+          ref={sliderRef}
+          className="w-full overflow-x-auto flex space-x-4 pb-4"
+        >
+          {data.map((item, idx) => (
+            <div
+              key={idx}
+              className="flex-none w-[300px] bg-white shadow-lg p-4 rounded-lg flex items-center space-x-4"
+            >
+              <img
+                src={item.img}
+                alt={item.name}
+                className="w-16 h-16 rounded-full object-cover"
+              />
+              <div>
+                <h3 className="text-lg font-semibold text-orange-600">
+                  {item.name}
+                </h3>
+                <p className="text-sm text-gray-500">{item.rank}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div className="flex justify-center mt-4 space-x-2">
+        {data.map((_, idx) => (
+          <button
+            key={idx}
+            onClick={() => setIndex(idx)}
+            className={`w-3 h-3 rounded-full transition-all ${
+              idx === index ? "bg-orange-500 w-4" : "bg-gray-300"
+            }`}
+          />
+        ))}
+      </div>
+    </div>
+  );
+};
+
+const items = [
+  { img: "/image1.jpg", link: "#" },
+  { img: "/image2.jpg", link: "#" },
+  { img: "/image3.jpg", link: "#" },
+  { img: "/image4.jpg", link: "#" },
+  { img: "/image4.jpg", link: "#" },
+
+  { img: "/image4.jpg", link: "#" },
+
+  { img: "/image4.jpg", link: "#" },
+
+  { img: "/image4.jpg", link: "#" },
+
+];;
+// const HorizontalScroll = () => {
+//   const scrollRef = useRef<HTMLDivElement>(null);
+
+
+  const HorizontalScroll = () => {
+    const scrollRef = useRef<HTMLDivElement>(null);
+  
+    const scroll = (direction: "left" | "right") => {
+      if (scrollRef.current) {
+        const { scrollLeft, clientWidth } = scrollRef.current;
+        const scrollAmount = clientWidth * 0.8;
+        scrollRef.current.scrollTo({
+          left: direction === "left" ? scrollLeft - scrollAmount : scrollLeft + scrollAmount,
+          behavior: "smooth",
+        });
+      }
+    };
+  return (
+    <div className="relative w-full px-6 py-8 bg-gray-100 rounded-xl">
+      <h2 className="text-2xl font-bold text-center mb-6 text-gray-800">جدیدترین مطالب</h2>
+
+      {/* دکمه‌های اسکرول */}
+      <button
+        className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white p-3 rounded-full shadow-lg transition-all duration-300 hover:bg-gray-900 hover:scale-110"
+        onClick={() => scroll("left")}
+      >
+        ◀
+      </button>
+      <button
+        className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white p-3 rounded-full shadow-lg transition-all duration-300 hover:bg-gray-900 hover:scale-110"
+        onClick={() => scroll("right")}
+      >
+        ▶
+      </button>
+
+      {/* اسکرول افقی */}
+      <div ref={scrollRef} className="flex space-x-6 overflow-x-auto scrollbar-hide scroll-smooth px-12">
+        {items.map((item, idx) => (
+          <div
+            key={idx}
+            className="min-w-[300px] bg-white shadow-lg rounded-xl overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-2xl"
+          >
+            <img src={item.img} alt="Card" className="w-full h-48 object-cover" />
+            <div className="p-4 flex justify-center">
+              <a
+                href={item.link}
+                className="bg-blue-500 text-white py-2 px-4 rounded-lg text-center transition-all duration-300 hover:bg-blue-600 hover:shadow-md"
+              >
+                مشاهده ادامه مطالب
+              </a>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
 
 export default function Home() {
   return (
@@ -516,6 +647,8 @@ export default function Home() {
       <CalendarSection />
       <AdvisorsSection />
       <HonorsSlider />
+      <HonorsSlider2 />
+      <HorizontalScroll />
     </>
   );
 }
