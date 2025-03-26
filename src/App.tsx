@@ -8,6 +8,7 @@ import { BrowserRouter as Router, Route,  } from 'react-router-dom';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import Home from './Pages/Home';
+import AdminPanel from './components/AdminPanel/Panel';
 //  import AdminDashboard from './components/AdminPanel/AdminDashboard';
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
  <Router>
    <Header title={'Borhan'} logoUrl={'logo.png'} />
    <Home/>
+   {/* <AdminPanel/> */}
    <Footer background={'background.jpg'} title={'test'} />
  </Router>
 
