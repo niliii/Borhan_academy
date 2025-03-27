@@ -6,6 +6,7 @@ import "tailwindcss/tailwind.css";
 import img11 from "../assets/Images/img11.jpg";
 import img12 from "../assets/Images/img12.jpg";
 import img22 from "../assets/Images/img22.jpg";
+import Teachers from "./Teachers";
 type FooterProps = {
   title: string;
   img11: string;
@@ -319,8 +320,8 @@ const AdvisorsSection = () => {
   ];
 
   return (
-    <section className="py-16 bg-white text-gray-900 relative">
-      <div className="container mx-auto px-6 text-center">
+    <section className="py-16 bg-white text-gray-900 relative ">
+      <div className="container mx-auto px-6 text-center  ">
         <h2 className="text-3xl lg:text-4xl font-bold">
           مشاوره درسی با رتبه‌های برتر آزمون وکالت ۹۹
         </h2>
@@ -352,7 +353,7 @@ const AdvisorsSection = () => {
           {/* لیست مشاوران با اسکرول افقی */}
           <div
             ref={scrollRef}
-            className="overflow-x-auto scrollbar-hide flex gap-6 px-12 w-full max-w-4xl"
+            className="overflow-x-auto scrollbar-hide flex gap-6 px-12 w-full max-w-4xl no-scrollbar"
             style={{
               scrollBehavior: "smooth",
               WebkitOverflowScrolling: "touch",
@@ -411,6 +412,21 @@ const data = [
     img: "/assets/Images/BestAvatar/1.jpg",
   },
   {
+    name: "یاسمین ساغری",
+    rank: "رتبه 27 کانون خراسان سال 99",
+    img: "/assets/Images/BestAvatar/1.jpg",
+  },
+  {
+    name: "یاسمین ساغری",
+    rank: "رتبه 27 کانون خراسان سال 99",
+    img: "/assets/Images/BestAvatar/1.jpg",
+  },
+  {
+    name: "یاسمین ساغری",
+    rank: "رتبه 27 کانون خراسان سال 99",
+    img: "/assets/Images/BestAvatar/1.jpg",
+  },
+  {
     name: "فاطمه بیرجندی",
     rank: "رتبه 5 کانون خراسان سال 99",
     img: "/assets/Images/BestAvatar/10.jpg",
@@ -442,22 +458,17 @@ const data = [
   },
 ];
 
-const HonorsSlider = () => {
+
+
+
+const HonorsSlider: React.FC = () => {
   const [index, setIndex] = useState(0);
   const intervalTime = 4000;
-  const sliderRef = useRef(null);
+  const sliderRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const interval = setInterval(() => {
       setIndex((prevIndex) => (prevIndex + 1) % data.length);
-
-      // استفاده از setTimeout برای اطمینان از وجود sliderRef
-      setTimeout(() => {
-        if (sliderRef.current) {
-          // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-          ({ left: 300, behavior: "smooth" });
-        }
-      }, 100); // 100 میلی‌ثانیه تأخیر
     }, intervalTime);
 
     return () => clearInterval(interval);
@@ -466,15 +477,16 @@ const HonorsSlider = () => {
   return (
     <div className="relative w-full overflow-hidden bg-gray-100 p-6 rounded-lg">
       <h2 className="text-2xl font-bold text-center mb-6">تالار افتخارات</h2>
-      <div className="flex justify-center items-center">
+      <div className="flex justify-center items-center overflow-hidden">
         <div
           ref={sliderRef}
-          className="w-full overflow-x-auto flex space-x-4 pb-4"
+          className="flex transition-transform duration-500 ease-in-out"
+          style={{ transform: `translateX(-${index * 320}px)`, width: `${data.length * 320}px` }}
         >
           {data.map((item, idx) => (
             <div
               key={idx}
-              className="flex-none w-[300px] bg-white shadow-lg p-4 rounded-lg flex items-center space-x-4"
+              className="flex-none w-[300px] bg-white shadow-lg p-4 rounded-lg flex items-center space-x-4 mx-2"
             >
               <img
                 src={item.img}
@@ -505,100 +517,103 @@ const HonorsSlider = () => {
     </div>
   );
 };
-const HonorsSlider2 = () => {
-  const [index, setIndex] = useState(0);
-  const intervalTime = 4000;
-  const sliderRef = useRef(null);
+// const HonorsSlider2 = () => {
+//   const [index, setIndex] = useState(0);
+//   const intervalTime = 4000;
+//   const sliderRef = useRef(null);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setIndex((prevIndex) => (prevIndex + 1) % data.length);
+//   useEffect(() => {
+//     const interval = setInterval(() => {
+//       setIndex((prevIndex) => (prevIndex + 1) % data.length);
 
-      if (sliderRef.current) {
-        // sliderRef.current.scrollLeft += 300;
-      }
-    }, intervalTime);
+//       if (sliderRef.current) {
+//         // sliderRef.current.scrollLeft += 300;
+//       }
+//     }, intervalTime);
 
-    return () => clearInterval(interval);
-  }, []);
+//     return () => clearInterval(interval);
+//   }, []);
 
-  return (
-    <div className="relative w-full overflow-hidden bg-gray-100 p-6 rounded-lg">
-      <h2 className="text-2xl font-bold text-center mb-6">تالار افتخارات</h2>
-      <div className="flex justify-center items-center">
-        <div
-          ref={sliderRef}
-          className="w-full overflow-x-auto flex space-x-4 pb-4"
-        >
-          {data.map((item, idx) => (
-            <div
-              key={idx}
-              className="flex-none w-[300px] bg-white shadow-lg p-4 rounded-lg flex items-center space-x-4"
-            >
-              <img
-                src={item.img}
-                alt={item.name}
-                className="w-16 h-16 rounded-full object-cover"
-              />
-              <div>
-                <h3 className="text-lg font-semibold text-orange-600">
-                  {item.name}
-                </h3>
-                <p className="text-sm text-gray-500">{item.rank}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-      <div className="flex justify-center mt-4 space-x-2">
-        {data.map((_, idx) => (
-          <button
-            key={idx}
-            onClick={() => setIndex(idx)}
-            className={`w-3 h-3 rounded-full transition-all ${
-              idx === index ? "bg-orange-500 w-4" : "bg-gray-300"
-            }`}
-          />
-        ))}
-      </div>
-    </div>
-  );
-};
+//   return (
+//     <div className="relative w-full overflow-hidden bg-gray-100 p-6 rounded-lg">
+//       <h2 className="text-2xl font-bold text-center mb-6">تالار افتخارات</h2>
+//       <div className="flex justify-center items-center no-scrollbar1">
+//         <div
+//           ref={sliderRef}
+//           className="w-full overflow-x-auto flex space-x-4 pb-4 "
+//         >
+//           {data.map((item, idx) => (
+//             <div
+//               key={idx}
+//               className="flex-none w-[300px] bg-white shadow-lg p-4 rounded-lg flex items-center space-x-4 "
+//             >
+//               <img
+//                 src={item.img}
+//                 alt={item.name}
+//                 className="w-16 h-16 rounded-full object-cover "
+//               />
+//               <div>
+//                 <h3 className="text-lg font-semibold text-orange-600">
+//                   {item.name}
+//                 </h3>
+//                 <p className="text-sm text-gray-500">{item.rank}</p>
+//               </div>
+//             </div>
+//           ))}
+//         </div>
+//       </div>
+//       <div className="flex justify-center mt-4 space-x-2">
+//         {data.map((_, idx) => (
+//           <button
+//             key={idx}
+//             onClick={() => setIndex(idx)}
+//             className={`w-3 h-3 rounded-full transition-all ${
+//               idx === index ? "bg-orange-500 w-4" : "bg-gray-300"
+//             }`}
+//           />
+//         ))}
+//       </div>
+//     </div>
+//   );
+// };
 
 const items = [
-  { img: "/image1.jpg", link: "#" },
-  { img: "/image2.jpg", link: "#" },
-  { img: "/image3.jpg", link: "#" },
-  { img: "/image4.jpg", link: "#" },
-  { img: "/image4.jpg", link: "#" },
+  { img: "/akhbar.png", link: "#" },
+  { img: "/akhbar.png", link: "#" },
+  { img: "/akhbar.png", link: "#" },
+  { img: "/akhbar.png", link: "#" },
+  { img: "/akhbar.png", link: "#" },
 
-  { img: "/image4.jpg", link: "#" },
+  { img: "/akhbar.png", link: "#" },
 
-  { img: "/image4.jpg", link: "#" },
+  { img: "/akhbar.png", link: "#" },
 
-  { img: "/image4.jpg", link: "#" },
-
-];;
+  { img: "/akhbar.png", link: "#" },
+];
 // const HorizontalScroll = () => {
 //   const scrollRef = useRef<HTMLDivElement>(null);
 
+const HorizontalScroll = () => {
+  const scrollRef = useRef<HTMLDivElement>(null);
 
-  const HorizontalScroll = () => {
-    const scrollRef = useRef<HTMLDivElement>(null);
-  
-    const scroll = (direction: "left" | "right") => {
-      if (scrollRef.current) {
-        const { scrollLeft, clientWidth } = scrollRef.current;
-        const scrollAmount = clientWidth * 0.8;
-        scrollRef.current.scrollTo({
-          left: direction === "left" ? scrollLeft - scrollAmount : scrollLeft + scrollAmount,
-          behavior: "smooth",
-        });
-      }
-    };
+  const scroll = (direction: "left" | "right") => {
+    if (scrollRef.current) {
+      const { scrollLeft, clientWidth } = scrollRef.current;
+      const scrollAmount = clientWidth * 0.8;
+      scrollRef.current.scrollTo({
+        left:
+          direction === "left"
+            ? scrollLeft - scrollAmount
+            : scrollLeft + scrollAmount,
+        behavior: "smooth",
+      });
+    }
+  };
   return (
     <div className="relative w-full px-6 py-8 bg-gray-100 rounded-xl">
-      <h2 className="text-2xl font-bold text-center mb-6 text-gray-800">جدیدترین مطالب</h2>
+      <h2 className="text-2xl font-bold text-center mb-6 text-gray-800">
+        جدیدترین مطالب
+      </h2>
 
       {/* دکمه‌های اسکرول */}
       <button
@@ -614,14 +629,23 @@ const items = [
         ▶
       </button>
 
+      
+
       {/* اسکرول افقی */}
-      <div ref={scrollRef} className="flex space-x-6 overflow-x-auto scrollbar-hide scroll-smooth px-12">
+      <div
+        ref={scrollRef}
+        className="flex space-x-6 overflow-x-auto no-scrollbar px-12 scroll-container "
+      >
         {items.map((item, idx) => (
           <div
             key={idx}
             className="min-w-[300px] bg-white shadow-lg rounded-xl overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-2xl"
           >
-            <img src={item.img} alt="Card" className="w-full h-48 object-cover" />
+            <img
+              src={item.img}
+              alt="Card"
+              className="w-full h-48 object-cover"
+            />
             <div className="p-4 flex justify-center">
               <a
                 href={item.link}
@@ -646,8 +670,9 @@ export default function Home() {
       <RegistrationSection />
       <CalendarSection />
       <AdvisorsSection />
+      <Teachers/>
       <HonorsSlider />
-      <HonorsSlider2 />
+   
       <HorizontalScroll />
     </>
   );

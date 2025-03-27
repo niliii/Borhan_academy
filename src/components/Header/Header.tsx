@@ -7,10 +7,10 @@ type HeaderProps = {
 
 const Header: React.FC<HeaderProps> = ({ title, logoUrl }) => {
   return (
-    <header className="bg-gray-600 text-white py-4 px-6 shadow-md">
+    <header className="bg-gray-400 position-fix text-white py-4 px-6 shadow-md">
       <div className="container mx-auto flex justify-between items-center ">
         <nav>
-          <ul className="flex space-x-4 rtl:space-x-reverse flex-row-reverse">
+          <ul className="flex space-x-10 rtl:space-x-reverse flex-row-reverse ">
             <li>
               <a href="Home" className="hover:underline">
                 صفحه اصلی

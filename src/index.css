@@ -11,9 +11,36 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
 
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+  -ms-overflow-style: none;  
+    scrollbar-width: none; 
+}
+.scroll-container {
+  display: flex;
+  overflow-x: auto;
+  gap: 1rem; /* معادل space-x-4 */
+  padding-bottom: 1rem; /* معادل pb-4 */
+  scrollbar-width: none; /* مخفی کردن اسکرول در فایرفاکس */
+}
+.scroll-container::-webkit-scrollbar {
+  display: none; /* مخفی کردن اسکرول در کروم */
+}
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+
+@layer utilities {
+  @variants dark {
+    .filter-none {
+      filter: none;
+    }
+    .filter-grayscale {
+      filter: grayscale(100%);
+    }
+  }
 }
