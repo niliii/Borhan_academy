@@ -10,6 +10,7 @@ import Footer from './components/Footer/Footer';
 import Home from './Pages/Home';
 import AdminPanel from './components/AdminPanel/Panel';
 import Cours from './Pages/Cours';
+import EventSchedule from './Pages/EventSchedule';
 //  import AdminDashboard from './components/AdminPanel/AdminDashboard';
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
    <Header title={'Borhan'} logoUrl={'logo.png'} />
    {/* <Home/> */}
    <Cours/>
+   <EventSchedule/>
    {/* <AdminPanel/> */}
    <Footer background={'background.jpg'} title={'test'} />
  </Router>
