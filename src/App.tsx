@@ -1,34 +1,27 @@
-import React  from 'react';
-import { BrowserRouter as Router, Route,  } from 'react-router-dom';
-//  import Home from './pages/Home';
-//  import About from './pages/About';
-//  import Contact from './pages/Contact';
-//  import Header from './components/Header';
-//  import Footer from './components/Footer';
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import Home from './Pages/Home';
 import AdminPanel from './components/AdminPanel/Panel';
 import Cours from './Pages/Cours';
 import EventSchedule from './Pages/EventSchedule';
-//  import AdminDashboard from './components/AdminPanel/AdminDashboard';
+import Layout from './Layout/Layout';
 
 function App() {
   return (
-
-<>
-   
- <Router>
-   <Header title={'Borhan'} logoUrl={'logo.png'} />
-   {/* <Home/> */}
-   <Cours/>
-   <EventSchedule/>
-   {/* <AdminPanel/> */}
-   <Footer background={'background.jpg'} title={'test'} />
- </Router>
-
-
-</> 
+    <Router>
+    <Layout>
+      <Header title={'Borhan'} logoUrl={'logo.png'} />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/cours" element={<Cours />} />
+        <Route path="/event-schedule" element={<EventSchedule />} />
+        {/* <Route path="/admin-panel" element={<AdminPanel />} /> */}
+      </Routes>
+      <Footer background={'background.jpg'} title={'test'} />
+    </Layout>
+  </Router>
   );
 }
 
