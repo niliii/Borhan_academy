@@ -18,8 +18,10 @@ const Header: React.FC<HeaderProps> = ({ title, logoUrl }) => {
 
   return (
     <header
-    className={`fixed top-0 left-0 w-full backdrop-blur-lg transition-all duration-300 ${
-      scrolled ? "bg-gray-800/80 shadow-lg" : "bg-white/30 dark:bg-gray-900/30"
+    className={`fixed top-0 left-0 w-full transition-all duration-300 z-50 ${
+      scrolled
+        ? "bg-gray-400/90 text-black shadow-lg" // رنگ تیره‌تر برای اسکرول‌شده
+        : "bg-white/70 dark:bg-gray-400/80 text-black-900 dark:text-gray-200"
     }`}
   >
     <div className="container mx-auto flex justify-between items-center p-4">
@@ -29,21 +31,31 @@ const Header: React.FC<HeaderProps> = ({ title, logoUrl }) => {
       </div>
   
       <nav className="flex-1 flex justify-center">
-        <ul className="flex space-x-8 text-gray-800 dark:text-white">
-          <li>
-            <a href="/" className="hover:text-gray-500 transition">صفحه اصلی</a>
-          </li>
-          <li>
-            <a href="#" className="hover:text-gray-500 transition">همه‌ی دوره‌ها</a>
-          </li>
-          <li>
-            <a href="#" className="hover:text-gray-500 transition">درباره ما</a>
-          </li>
-          <li>
-            <a href="#" className="hover:text-gray-500 transition">تماس با ما</a>
-          </li>
-        </ul>
-      </nav>
+  <ul className="flex space-x-8 text-gray-800 dark:text-white">
+    <li>
+      <a href="/Home" className="hover:text-gray-500 transition">صفحه اصلی</a>
+    </li>
+    <li>
+      <a href="/Cours" className="hover:text-gray-500 transition">همه‌ی دوره‌ها</a>
+    </li>
+    <li>
+      <a href="/About" className="hover:text-gray-500 transition">درباره ما</a>
+    </li>
+    <li>
+      <a href="/Contact" className="hover:text-gray-500 transition">تماس با ما</a>
+    </li>
+    <li>
+      <a href="/SignInForm" className="hover:text-gray-500 transition">
+        <i className="fas fa-user-plus"></i> ثبت نام
+      </a>
+    </li>
+    <li>
+      <a href="/Users" className="hover:text-gray-500 transition">
+        <i className="fas fa-user-plus"></i> داشبورد
+      </a>
+    </li>
+  </ul>
+</nav>
   
       <div className="flex items-center">
         <img src={logoUrl} alt="Logo" className="h-10" />

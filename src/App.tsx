@@ -1,28 +1,83 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
+
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
+import Layout from './Layout/Layout';
+import { ScrollToTop } from 'components/common/ScrollToTop';
+
+// Pages
 import Home from './Pages/Home';
-import AdminPanel from './components/AdminPanel/Panel';
+import AboutUs from './Pages/About';
+import ContactUs from './Pages/Contant';
 import Cours from './Pages/Cours';
 import EventSchedule from './Pages/EventSchedule';
-import Layout from './Layout/Layout';
+import AdminPanel from './components/AdminPanel/Panel';
+import SignInForm from 'components/auth/SignInForm';
+
+// Auth Pages
+import SignIn from 'Pages/AuthPages/SignIn';
+import SignUp from 'Pages/AuthPages/SignUp';
+
+// Extra Pages
+import UserProfiles from 'Pages/UserProfiles';
+import Blank from 'Pages/Blank';
+import FormElements from 'Pages/Forms/FormElements';
+import BasicTables from 'Pages/Tables/BasicTables';
+import Alerts from 'Pages/UiElements/Alerts';
+import Avatars from 'Pages/UiElements/Avatars';
+import Badges from 'Pages/UiElements/Badges';
+import Buttons from 'Pages/UiElements/Buttons';
+import Images from 'Pages/UiElements/Images';
+import Videos from 'Pages/UiElements/Videos';
+import LineChart from 'Pages/Charts/LineChart';
+import BarChart from 'Pages/Charts/BarChart';
+import NotFound from 'Pages/OtherPage/NotFound';
 
 function App() {
   return (
     <Router>
-    <Layout>
-      <Header title={'Borhan'} logoUrl={'logo.png'} />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/cours" element={<Cours />} />
-        <Route path="/event-schedule" element={<EventSchedule />} />
-        {/* <Route path="/admin-panel" element={<AdminPanel />} /> */}
-      </Routes>
-      <Footer background={'background.jpg'} title={'test'} />
-    </Layout>
-  </Router>
+      <HelmetProvider>
+        <ScrollToTop />
+        <Header title={'Borhan'} logoUrl={'logo.png'} />
+
+        <Routes>
+          <Route element={<Layout children={undefined} />}>
+            <Route index path="/" element={<Home />} />
+            <Route path="/cours" element={<Cours />} />
+            <Route path="/event-schedule" element={<EventSchedule />} />
+            <Route path="/admin-panel" element={<AdminPanel />} />
+            <Route path="/about" element={<AboutUs />} />
+            <Route path="/contact" element={<ContactUs />} />
+            <Route path="/profile" element={<UserProfiles />} />
+            <Route path="/blank" element={<Blank />} />
+            <Route path="/form-elements" element={<FormElements />} />
+            <Route path="/basic-tables" element={<BasicTables />} />
+            <Route path="/alerts" element={<Alerts />} />
+            <Route path="/avatars" element={<Avatars />} />
+            <Route path="/badge" element={<Badges />} />
+            <Route path="/buttons" element={<Buttons />} />
+            <Route path="/images" element={<Images />} />
+            <Route path="/videos" element={<Videos />} />
+            <Route path="/line-chart" element={<LineChart />} />
+            <Route path="/bar-chart" element={<BarChart />} />
+          </Route>
+
+          {/* Auth */}
+          <Route path="/signin" element={<SignIn />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/SignInForm" element={<SignInForm />} />
+
+          {/* Fallback */}
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+
+        <Footer background={'background.jpg'} title={'test'} />
+      </HelmetProvider>
+    </Router>
   );
 }
+
 
 export default App;

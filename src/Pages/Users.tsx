@@ -2,7 +2,7 @@ import { useUserStore } from "../store/useUserStore";
 
 const Users = () => {
   const users = useUserStore((state) => state.users);
-  
+
   return (
     <div>
       <h1 className="text-2xl font-bold">Users</h1>

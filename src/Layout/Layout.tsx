@@ -8,9 +8,9 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
         <h2 className="text-xl font-bold">Admin Panel</h2>
         <nav className="mt-4">
           <ul>
-            <li><Link to="/" className="block py-2 px-4 hover:bg-gray-700">Dashboard</Link></li>
-            <li><Link to="/users" className="block py-2 px-4 hover:bg-gray-700">Users</Link></li>
-            <li><Link to="/settings" className="block py-2 px-4 hover:bg-gray-700">Settings</Link></li>
+            <li><Link to="/home" className="block py-2 px-4 hover:bg-gray-700">داشبورد</Link></li>
+            <li><Link to="/users" className="block py-2 px-4 hover:bg-gray-700">کاربران</Link></li>
+            <li><Link to="/settings" className="block py-2 px-4 hover:bg-gray-700">تنظیمات</Link></li>
           </ul>
         </nav>
       </aside>

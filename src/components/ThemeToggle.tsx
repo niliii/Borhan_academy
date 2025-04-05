@@ -1,3 +1,7 @@
-// import { useEffect, useState } from "react";
+import React from 'react'
 
-// export  default ThemeToggle;
+export default function ThemeToggle() {
+  return (
+    <div>ThemeToggle</div>
+  )
+}

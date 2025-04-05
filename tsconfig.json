@@ -14,12 +14,24 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "baseUrl": "src",
+    "outDir": "../out-tsc/app",
+    "types": ["jquery", "Dropzone"],
+    "paths": {
+      "@icons/*": ["assets/icons/*"]
+    }
   },
-  "include": ["src", "declarations.d.ts"], 
+  "include": [
+    "src",
+    "declarations.d.ts",
+    "test.ts",
+    "**/*.spec.ts"
+  ],
   "exclude": ["node_modules"],
   "include": ["src"]
 }
+
 
 // {
 //   "compilerOptions": {

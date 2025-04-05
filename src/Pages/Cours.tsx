@@ -17,7 +17,7 @@ const classes = [
 
 const Cours = () => {
   return (
-    <div className="w-full py-12 bg-white">
+    <div className="w-full py-12 bg-white pt-32">
       {/* تیتر بخش */}
       <h2 className="text-2xl font-bold text-center mb-6">
         قابل توجه دانش پذیران گروه آموزشی برهان
