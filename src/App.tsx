@@ -34,22 +34,25 @@ import Videos from 'Pages/UiElements/Videos';
 import LineChart from 'Pages/Charts/LineChart';
 import BarChart from 'Pages/Charts/BarChart';
 import NotFound from 'Pages/OtherPage/NotFound';
+import { ThemeProvider } from 'context/ThemeContext';
+import AppLayout from 'Layout/AppLayout';
+
 
 function App() {
   return (
-    <Router>
-      <HelmetProvider>
+    <ThemeProvider>
+    <HelmetProvider>
+      <Router>
         <ScrollToTop />
-        <Header title={'Borhan'} logoUrl={'logo.png'} />
-
         <Routes>
-          <Route element={<Layout children={undefined} />}>
+          {/* Main App Layout */}
+          <Route element={<AppLayout />}>
             <Route index path="/" element={<Home />} />
+            <Route path="/about" element={<AboutUs />} />
+            <Route path="/contact" element={<ContactUs />} />
             <Route path="/cours" element={<Cours />} />
             <Route path="/event-schedule" element={<EventSchedule />} />
             <Route path="/admin-panel" element={<AdminPanel />} />
-            <Route path="/about" element={<AboutUs />} />
-            <Route path="/contact" element={<ContactUs />} />
             <Route path="/profile" element={<UserProfiles />} />
             <Route path="/blank" element={<Blank />} />
             <Route path="/form-elements" element={<FormElements />} />
@@ -67,15 +70,15 @@ function App() {
           {/* Auth */}
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
-          <Route path="/SignInForm" element={<SignInForm />} />
+          <Route path="/signinform" element={<SignInForm />} />
 
           {/* Fallback */}
           <Route path="*" element={<NotFound />} />
         </Routes>
-
-        <Footer background={'background.jpg'} title={'test'} />
-      </HelmetProvider>
-    </Router>
+      </Router>
+    </HelmetProvider>
+  </ThemeProvider>
+    
   );
 }
 
