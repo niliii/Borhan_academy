@@ -36,9 +36,15 @@ import BarChart from 'Pages/Charts/BarChart';
 import NotFound from 'Pages/OtherPage/NotFound';
 import { ThemeProvider } from 'context/ThemeContext';
 import AppLayout from 'Layout/AppLayout';
+import LayoutSwitcher from 'LayoutSwitcher';
+import SiteLayout from 'Layout/SiteLayout';
+
+
 
 
 function App() {
+
+  
   return (
     <ThemeProvider>
     <HelmetProvider>
@@ -46,10 +52,13 @@ function App() {
         <ScrollToTop />
         <Routes>
           {/* Main App Layout */}
-          <Route element={<AppLayout />}>
-            <Route index path="/" element={<Home />} />
-            <Route path="/about" element={<AboutUs />} />
-            <Route path="/contact" element={<ContactUs />} />
+          {/* <Route element={<LayoutSwitcher />}> */}
+          {/* <Route path="/" element={<AppLayout />} /> */}
+          <Route element={<SiteLayout />}>
+        <Route index path="/" element={<Home />} />
+        <Route path="/about" element={<AboutUs />} />
+        <Route path="/contact" element={<ContactUs />} />
+          
             <Route path="/cours" element={<Cours />} />
             <Route path="/event-schedule" element={<EventSchedule />} />
             <Route path="/admin-panel" element={<AdminPanel />} />
