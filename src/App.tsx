@@ -6,7 +6,7 @@ import { ThemeProvider } from 'context/ThemeContext';
 import { ScrollToTop } from 'components/common/ScrollToTop';
 
 // Layouts
-import SiteLayout from './Layout/SiteLayout';
+// import SiteLayout from './Layout/SiteLayout';
 // import AdminLayout from './Layout/AdminLayout';
 
 // Site Pages
@@ -40,6 +40,7 @@ import BarChart from 'Pages/Charts/BarChart';
 import NotFound from 'Pages/OtherPage/NotFound';
 import AppHeader from 'Layout/AppHeader';
 import AppSidebar from 'Layout/AppSidebar';
+import SiteHeader from 'components/Header/SiteHeader';
 
 function App() {
   return (
@@ -50,7 +51,7 @@ function App() {
           <Routes>
 
             {/*  صفحات اصلی سایت با هدر و فوتر */}
-            <Route element={<SiteLayout />}>
+            <Route element={<SiteHeader />}>
               <Route index path="/" element={<Home />} />
               <Route path="/about" element={<AboutUs />} />
               <Route path="/contact" element={<ContactUs />} />

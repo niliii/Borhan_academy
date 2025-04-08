@@ -13,7 +13,7 @@ const SiteLayout: React.FC = () => {
       <main className="min-h-screen">
         <Outlet />
       </main>
-      <Footer title={""} background={""} /> {/* اگه خواستی */}
+      <Footer title={""} background={""} /> 
     </>
   );
 };
