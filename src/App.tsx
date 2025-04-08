@@ -41,6 +41,8 @@ import NotFound from 'Pages/OtherPage/NotFound';
 import AppHeader from 'Layout/AppHeader';
 import AppSidebar from 'Layout/AppSidebar';
 import SiteHeader from 'components/Header/SiteHeader';
+import AppLayout from 'Layout/AppLayout';
+import { Calendar } from 'lucide-react';
 
 function App() {
   return (
@@ -50,7 +52,7 @@ function App() {
           <ScrollToTop />
           <Routes>
 
-            {/*  صفحات اصلی سایت با هدر و فوتر */}
+            {/*  website */}
             <Route element={<SiteHeader />}>
               <Route index path="/" element={<Home />} />
               <Route path="/about" element={<AboutUs />} />
@@ -59,8 +61,11 @@ function App() {
               <Route path="/event-schedule" element={<EventSchedule />} />
             </Route>
 
-            {/*  صفحات پنل ادمین با layout جدا */}
-            <Route path="/admin" element={<AppSidebar/>}>
+            {/* Adminpanel layout*/}
+            <Route element={<AppLayout />}>
+            <Route index path="/" element={<Home />} /> 
+            {/* <Route path="/admin" element={<AppSidebar/>}> */}
+            <Route path="/calendar" element={<Calendar />} />
               <Route path="panel" element={<AdminPanel />} />
               <Route path="profile" element={<UserProfiles />} />
               <Route path="blank" element={<Blank />} />
@@ -76,12 +81,12 @@ function App() {
               <Route path="bar-chart" element={<BarChart />} />
             </Route>
 
-            {/* صفحات ورود و ثبت‌نام */}
+            {/* login logout*/}
             <Route path="/signin" element={<SignIn />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/signinform" element={<SignInForm />} />
 
-            {/*  صفحه 404 */}
+            {/*  page 404 */}
             <Route path="*" element={<NotFound />} />
 
           </Routes>
