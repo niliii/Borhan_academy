@@ -52,7 +52,7 @@ export default function SiteHeader() {
             </li>
             <li>
               <Link to="/signinform" className="hover:text-gray-500 transition">
-                ثبت‌نام
+                ثبت‌ نام
               </Link>
             </li>
             <li>
