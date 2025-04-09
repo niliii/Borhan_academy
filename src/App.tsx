@@ -43,6 +43,7 @@ import AppSidebar from 'Layout/AppSidebar';
 import SiteHeader from 'components/Header/SiteHeader';
 import AppLayout from 'Layout/AppLayout';
 import { Calendar } from 'lucide-react';
+import SiteLayout from 'Layout/SiteLayout';
 
 function App() {
   return (
@@ -62,7 +63,8 @@ function App() {
             </Route>
 
             {/* Adminpanel layout*/}
-            <Route element={<AppLayout />}>
+            <Route element={<SiteLayout />}>
+            <Route element={<AppLayout />}/>
             <Route index path="/" element={<Home />} /> 
             {/* <Route path="/admin" element={<AppSidebar/>}> */}
             <Route path="/calendar" element={<Calendar />} />
