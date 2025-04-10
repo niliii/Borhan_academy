@@ -17,6 +17,7 @@
     "@testing-library/user-event": "^13.5.0",
     "@types/react": "^19.0.12",
     "@types/react-dom": "^19.0.4",
+    "@usedispatch/client": "^0.15.7",
     "apexcharts": "^4.5.0",
     "clsx": "^2.1.1",
     "flatpickr": "^4.6.13",

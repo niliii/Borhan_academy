@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { ChevronLeftIcon, EyeCloseIcon, EyeIcon } from "components/icons";
 import Label from "../form/Label";
 import Input from "../form/input/InputField";
 import Checkbox from "../form/input/Checkbox";
 import Button from "../ui/button/Button";
+import { useUserStore } from "store/useUserStore";
 
 export default function SignInForm() {
   const [showPassword, setShowPassword] = useState(false);
@@ -20,6 +21,23 @@ export default function SignInForm() {
       document.documentElement.classList.remove("dark");
     }
   }, [darkMode]);
+
+
+
+
+
+  const setUser = useUserStore((state) => state.setUser);
+const navigate = useNavigate();
+
+const handleLogin = () => {
+  // اینجا فرض می‌کنیم لاگین موفق بوده
+  const fakeUser = {
+    email: "test@example.com",
+    token: "123456789"
+  };
+  // setUser(fakeUser );
+  navigate("/admin-panel");
+};
   // function setDarkMode(arg0: boolean): void {
   //   throw new Error("Function not implemented.");
   // }
@@ -116,7 +134,7 @@ export default function SignInForm() {
           </Link>
         </div>
 
-        <Button className="w-full mt-3" size="sm">
+        <Button className="w-full mt-3" size="sm"   onClick={handleLogin}>
           ورود
         </Button>
       </form>
