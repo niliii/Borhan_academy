@@ -26,7 +26,7 @@ export default function SignInForm() {
 
 
 
-  const setUser = useUserStore((state) => state.setUser);
+const setUser = useUserStore((state) => state.setUser);
 const navigate = useNavigate();
 
 const handleLogin = () => {
@@ -71,15 +71,15 @@ const handleLogin = () => {
       </div>
 
       {/* دکمه‌های شبکه اجتماعی */}
-      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 mb-6">
-        <button className="flex items-center justify-center gap-3 py-3 text-sm font-medium transition-colors bg-white rounded-lg shadow-sm px-5 hover:bg-gray-100 dark:bg-white/10 dark:text-white dark:hover:bg-white/20">
-          ورود با گوگل
-        </button>
-        <button className="flex items-center justify-center gap-3 py-3 text-sm font-medium transition-colors bg-white rounded-lg shadow-sm px-5 hover:bg-gray-100 dark:bg-white/10 dark:text-white dark:hover:bg-white/20">
-          ورود با اکس
-        </button>
-      </div>
+      <div className="grid grid-cols-1 gap-3 mb-6 justify-center">
+  <button className="flex items-center justify-center gap-3 py-3 text-sm font-medium transition-colors bg-white rounded-lg shadow-sm px-5 hover:bg-gray-100 dark:bg-white/10 dark:text-white dark:hover:bg-white/20">
+    ورود با گوگل
+  </button>
+</div>
 
+ {/* <button className="flex items-center justify-center gap-3 py-3 text-sm font-medium transition-colors bg-white rounded-lg shadow-sm px-5 hover:bg-gray-100 dark:bg-white/10 dark:text-white dark:hover:bg-white/20">
+          ورود با اکس
+        </button> */}
       {/* جداکننده */}
       <div className="relative py-5">
         <div className="absolute inset-0 flex items-center">
