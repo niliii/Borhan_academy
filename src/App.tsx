@@ -55,6 +55,7 @@ function App() {
 
             {/*  website */}
             <Route element={<SiteHeader />}>
+            
               <Route index path="/" element={<Home />} />
               <Route path="/about" element={<AboutUs />} />
               <Route path="/contact" element={<ContactUs />} />

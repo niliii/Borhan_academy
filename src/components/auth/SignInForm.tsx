@@ -26,7 +26,7 @@ export default function SignInForm() {
 
 
 
-const setUser = useUserStore((state) => state.setUser);
+const setUser = useUserStore((state) => state.setUsers);
 const navigate = useNavigate();
 
 const handleLogin = () => {

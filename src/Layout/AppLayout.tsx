@@ -22,6 +22,7 @@ const LayoutContent: React.FC = () => {
         <div className="p-4 mx-auto max-w-(--breakpoint-2xl) md:p-6">
           <Outlet />
         </div>
+     
       </div>
     </div>
   );
@@ -29,9 +30,29 @@ const LayoutContent: React.FC = () => {
 
 const AppLayout: React.FC = () => {
   return (
-    <SidebarProvider>
-      <LayoutContent />
-    </SidebarProvider>
+    <div className="flex h-screen">
+      <AppSidebar />
+      <div className="flex-1 flex flex-col">
+        <AppHeader />
+        <SidebarProvider>
+          <LayoutContent />
+        </SidebarProvider>
+        <main className="p-4 overflow-auto flex-1">
+         
+        </main>
+      </div>
+    </div>
+    //   <div className="flex">
+    //   <AppSidebar />
+    //   <main className="flex-1">
+    //   <Outlet />
+    //     <AppHeader />
+    //     <SidebarProvider>
+    //     <LayoutContent />
+    //   </SidebarProvider>
+
+    //   </main>
+    // </div>
   );
 };
 

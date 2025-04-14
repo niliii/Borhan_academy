@@ -1,8 +1,7 @@
 import Footer from "components/Footer/Footer";
 import Header from "components/Header/Header";
 import { Outlet } from "react-router-dom";
-// import Header from "../components/Header"; // همون header ساده سایت
-// import Footer from "../components/Footer"; // اختیاری، اگه داری
+
 
 const SiteLayout: React.FC = () => {
   return (

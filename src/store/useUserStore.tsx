@@ -5,18 +5,18 @@ type User = {
   name: string;
   email: string;
   token: string;
-} ;
-
-type UserStore = {
-  user: User | null;
-  setUser: (user: User) => void;
-  clearUser: () => void;
 };
 
+type UserStore = {
+  users: User[];
+  addUser: (user: User) => void;
+  setUsers: (users: User[]) => void;
+  clearUsers: () => void;
+};
 
 export const useUserStore = create<UserStore>((set) => ({
-  user: null,
-  setUser: (user) => set({ user }),
-  clearUser: () => set({ user: null }),
-  
+  users: [],
+  addUser: (user) => set((state) => ({ users: [...state.users, user] })),
+  setUsers: (users) => set({ users }),
+  clearUsers: () => set({ users: [] }),
 }));

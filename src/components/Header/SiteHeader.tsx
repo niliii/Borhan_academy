@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import ThemeToggle from "components/ThemeToggle";
+import Footer from "components/Footer/Footer";
 
 export default function SiteHeader() {
   const [scrolled, setScrolled] = useState(false);
@@ -16,13 +17,12 @@ export default function SiteHeader() {
   const logoUrl = "/images/logo/logo.svg"; 
 
   return (
-    <header
-      className={`fixed top-0 left-0 w-full transition-all duration-300 z-50 ${
-        scrolled
+    <><header
+      className={`fixed top-0 left-0 w-full transition-all duration-300 z-50 ${scrolled
           ? "bg-gray-400/90 text-black shadow-lg"
-          : "bg-white/70 dark:bg-gray-800/80 text-black dark:text-white"
-      }`}
+          : "bg-white/70 dark:bg-gray-800/80 text-black dark:text-white"}`}
     >
+
       <div className="container mx-auto flex justify-between items-center p-4">
         <div className="flex items-center">
           <ThemeToggle />
@@ -66,7 +66,12 @@ export default function SiteHeader() {
         <div className="flex items-center">
           <img src={logoUrl} alt="Logo" className="h-10" />
         </div>
+
       </div>
     </header>
+    <main className="pt-24">
+        <Outlet />
+        <Footer title={""} background={""}/>
+      </main></>
   );
 }
