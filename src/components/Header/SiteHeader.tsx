@@ -56,7 +56,7 @@ export default function SiteHeader() {
               </Link>
             </li>
             <li>
-              <Link to="/AppLayout" className="hover:text-gray-500 transition">
+              <Link to="/DashbordHome" className="hover:text-gray-500 transition">
                 داشبورد
               </Link>
             </li>

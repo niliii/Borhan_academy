@@ -10,7 +10,7 @@ import UserDropdown from "./UserDropdown";
 // };
 
 interface HeaderProps {
-  onClick?: () => void; // Optional function that takes no arguments and returns void
+  onClick?: () => void; 
   onToggle: () => void;
   title: string;
    logoUrl: string;

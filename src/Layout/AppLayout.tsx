@@ -38,7 +38,6 @@ const AppLayout: React.FC = () => {
           <LayoutContent />
         </SidebarProvider>
         <main className="p-4 overflow-auto flex-1">
-         
         </main>
       </div>
     </div>
