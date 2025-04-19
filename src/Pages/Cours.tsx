@@ -1,4 +1,13 @@
 import React from "react";
+import axios from 'axios';
+
+axios.get('https://demo-api.darkube.app/api/Course')
+  .then((response) => {
+    console.log(response.data);
+  })
+  .catch((error) => {
+    console.error(error);
+  });
 
 const downloads = [
   { id: 1, label: "نرم افزار adobe connect برای ویندوز", link: "#" },

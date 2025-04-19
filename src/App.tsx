@@ -45,6 +45,8 @@ import AppLayout from 'Layout/AppLayout';
 import { Calendar } from 'lucide-react';
 import SiteLayout from 'Layout/SiteLayout';
 import DashbordHome from 'Pages/Dashboard/DashbordHome';
+import RegisterTest from 'RegisterTest';
+import LoginTest from 'LoginTest';
 
 function App() {
   return (
@@ -56,6 +58,9 @@ function App() {
 
             {/*  website */}
             <Route element={<SiteHeader />}>
+            <Route path="/register-test" element={<RegisterTest />} />
+            <Route path="/login-test" element={<LoginTest />} />
+
             
               <Route index path="/" element={<Home />} />
               <Route path="/about" element={<AboutUs />} />
@@ -67,6 +72,7 @@ function App() {
             {/* Adminpanel layout*/}
             {/* <Route element={<SiteLayout />}> */}
             <Route element={<AppLayout />}>
+            
             <Route index path="/" element={< DashbordHome/>} /> 
             {/* <Route path="/admin" element={<AppSidebar/>}/> */}
             <Route path="/calendar" element={<Calendar />} />
