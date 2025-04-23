@@ -41,6 +41,7 @@ export default function SignInForm() {
     try {
       const response = await AccountAPI.login({ username, password });
       const token = response.data.token;
+      localStorage.setItem("token", token); // یا ذخیره در Zustand
       console.log("Login success:", token);
       // localStorage.setItem("token", token); // یا ذخیره در Zustand
       // ذخیره در Zustand یا localStorage و هدایت به داشبورد

@@ -1,17 +1,29 @@
 import axios from "axios";
 
-export const api = axios.create({
+// ساخت یک instance اختصاصی از axios
+const api = axios.create({
+  baseURL: "https://demo-api.darkube.app/api",
   headers: {
     "Content-Type": "application/json",
+    Accept: "*/*",
   },
 });
 
-// Account APIs
-export const AccountAPI = {
-  login: (data: { username: string; password: string }) =>
-    axios.post("/api/Account/token", data),
-  
+// اضافه کردن توکن به درخواست‌ها با استفاده از interceptor
+api.interceptors.request.use((config) => {
+  const token = localStorage.getItem("token"); // یا از Zustand بگیر
+  if (token && config.headers) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+});
 
+export const AccountAPI = {
+  // Login فقط با username و password
+  login: (data: { username: string; password: string }) =>
+    api.post("/Account/token", data),
+
+  // Register با اطلاعات کامل
   register: (data: {
     name: string;
     email: string;
@@ -19,5 +31,6 @@ export const AccountAPI = {
     confirmPassword: string;
   }) => api.post("/Account/Register", data),
 
+  // گرفتن لیست کاربران
   getAllUsers: () => api.get("/Account/GetAllUsers"),
 };
