@@ -295,28 +295,28 @@ const AdvisorsSection = () => {
       name: "محسن شاه حسینی",
       day: "یک‌شنبه",
       time: "۱۲ تا ۱۶",
-      img: "/advisor1.jpg",
+      img: "/assets/Images/BestAvatar/1.jpg",
     },
     {
       name: "هنگامه فرخی",
       day: "چهارشنبه",
       time: "۱۰ تا ۱۵",
-      img: "/advisor2.jpg",
+      img: "/assets/Images/BestAvatar/8.jpg",
     },
     {
       name: "مهدی خلیلی",
       day: "سه‌شنبه",
       time: "۱۶ تا ۲۰",
-      img: "/advisor3.jpg",
+      img: "/assets/Images/BestAvatar/3.jpg",
     },
     {
       name: "فاطمه بیرجندی",
       day: "پنج‌شنبه",
       time: "۱۵ تا ۲۰",
-      img: "/advisor4.jpg",
+      img: "/assets/Images/BestAvatar/7.jpg",
     },
-    { name: "رضا علوی", day: "دوشنبه", time: "۱۴ تا ۱۸", img: "/advisor5.jpg" },
-    { name: "زهرا محمدی", day: "شنبه", time: "۱۳ تا ۱۷", img: "/advisor6.jpg" },
+    { name: "رضا علوی", day: "دوشنبه", time: "۱۴ تا ۱۸", img: "/assets/Images/BestAvatar/5.jpg" },
+    { name: "زهرا محمدی", day: "شنبه", time: "۱۳ تا ۱۷", img: "/assets/Images/BestAvatar/6.jpg" },
   ];
 
   return (

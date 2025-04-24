@@ -42,7 +42,7 @@ import AppHeader from 'Layout/AppHeader';
 import AppSidebar from 'Layout/AppSidebar';
 import SiteHeader from 'components/Header/SiteHeader';
 import AppLayout from 'Layout/AppLayout';
-import { Calendar } from 'lucide-react';
+import { Calendar, Users } from 'lucide-react';
 import SiteLayout from 'Layout/SiteLayout';
 import DashbordHome from 'Pages/Dashboard/DashbordHome';
 import RegisterTest from 'RegisterTest';
@@ -74,7 +74,8 @@ function App() {
             <Route element={<AppLayout />}>
             
             <Route index path="/" element={< DashbordHome/>} /> 
-            {/* <Route path="/admin" element={<AppSidebar/>}/> */}
+            <Route path="users" element={<Users />} />
+            <Route path="/admin" element={<AppSidebar/>}/>
             <Route path="/calendar" element={<Calendar />} />
               <Route path="panel" element={<AdminPanel />} />
               <Route path="profile" element={<UserProfiles />} />

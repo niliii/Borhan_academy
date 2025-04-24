@@ -19,6 +19,7 @@ interface UserStore {
   addUser: (user: User) => void;
   setUsers: (users: User[]) => void;
   clearUsers: () => void;
+  
 }
 
 export const useUserStore = create<UserStore>((set) => ({

@@ -8,7 +8,9 @@ import Button from "../ui/button/Button";
 import { useUserStore } from "store/useUserStore";
 import { AccountAPI } from "../../API/api";
 
+
 export default function SignInForm() {
+  // const { setToken } = useAuthStore();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
@@ -43,10 +45,8 @@ export default function SignInForm() {
       const token = response.data.token;
       localStorage.setItem("token", token); // یا ذخیره در Zustand
       console.log("Login success:", token);
-      // localStorage.setItem("token", token); // یا ذخیره در Zustand
-      // ذخیره در Zustand یا localStorage و هدایت به داشبورد
-
-      // navigate("/panel"); // رفتن به پنل ادمین بعد از لاگین موفق
+      // setToken(token); 
+      navigate("/panel");
     } catch (error) {
       console.error("Login error:", error);
       alert("نام کاربری یا رمز عبور اشتباه است.");

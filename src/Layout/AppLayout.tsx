@@ -31,13 +31,16 @@ const LayoutContent: React.FC = () => {
 const AppLayout: React.FC = () => {
   return (
     <div className="flex h-screen">
-      <AppSidebar />
+      
       <div className="flex-1 flex flex-col">
-        <AppHeader />
+      {/* <AppSidebar /> */}
+      <main className="p-4 overflow-auto flex-1">
+      
+        
         <SidebarProvider>
           <LayoutContent />
         </SidebarProvider>
-        <main className="p-4 overflow-auto flex-1">
+        
         </main>
       </div>
     </div>
