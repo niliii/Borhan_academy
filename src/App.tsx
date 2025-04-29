@@ -1,52 +1,50 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { HelmetProvider } from 'react-helmet-async';
-import { ThemeProvider } from 'context/ThemeContext';
+import React from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { HelmetProvider } from "react-helmet-async";
+import { ThemeProvider } from "context/ThemeContext";
 
-import { ScrollToTop } from 'components/common/ScrollToTop';
+import { ScrollToTop } from "components/common/ScrollToTop";
 
 // Layouts
 // import SiteLayout from './Layout/SiteLayout';
 // import AdminLayout from './Layout/AdminLayout';
 
 // Site Pages
-import Home from './Pages/Home';
-import AboutUs from './Pages/About';
-import ContactUs from './Pages/Contant';
-import Cours from './Pages/Cours';
-import EventSchedule from './Pages/EventSchedule';
+import Home from "./Pages/Home";
+import AboutUs from "./Pages/About";
+import ContactUs from "./Pages/Contant";
+import Cours from "./Pages/Cours";
+import EventSchedule from "./Pages/EventSchedule";
 
 // Auth Pages
-import SignIn from 'Pages/AuthPages/SignIn';
-import SignUp from 'Pages/AuthPages/SignUp';
-import SignInForm from 'components/auth/SignInForm';
+import SignIn from "Pages/AuthPages/SignIn";
+import SignUp from "Pages/AuthPages/SignUp";
+import SignInForm from "components/auth/SignInForm";
 
 // Admin Pages
-import AdminPanel from './components/AdminPanel/Panel';
-import UserProfiles from 'Pages/UserProfiles';
-import Blank from 'Pages/Blank';
-import FormElements from 'Pages/Forms/FormElements';
-import BasicTables from 'Pages/Tables/BasicTables';
-import Alerts from 'Pages/UiElements/Alerts';
-import Avatars from 'Pages/UiElements/Avatars';
-import Badges from 'Pages/UiElements/Badges';
-import Buttons from 'Pages/UiElements/Buttons';
-import Images from 'Pages/UiElements/Images';
-import Videos from 'Pages/UiElements/Videos';
-import LineChart from 'Pages/Charts/LineChart';
-import BarChart from 'Pages/Charts/BarChart';
+import AdminPanel from "./components/AdminPanel/Panel";
+import UserProfiles from "Pages/UserProfiles";
+import Blank from "Pages/Blank";
+import FormElements from "Pages/Forms/FormElements";
+import BasicTables from "Pages/Tables/BasicTables";
+import Alerts from "Pages/UiElements/Alerts";
+import Avatars from "Pages/UiElements/Avatars";
+import Badges from "Pages/UiElements/Badges";
+import Buttons from "Pages/UiElements/Buttons";
+import Images from "Pages/UiElements/Images";
+import Videos from "Pages/UiElements/Videos";
+import LineChart from "Pages/Charts/LineChart";
+import BarChart from "Pages/Charts/BarChart";
 
 // Fallback
-import NotFound from 'Pages/OtherPage/NotFound';
-import AppHeader from 'Layout/AppHeader';
-import AppSidebar from 'Layout/AppSidebar';
-import SiteHeader from 'components/Header/SiteHeader';
-import AppLayout from 'Layout/AppLayout';
-import { Calendar, Users } from 'lucide-react';
-import SiteLayout from 'Layout/SiteLayout';
-import DashbordHome from 'Pages/Dashboard/DashbordHome';
-import RegisterTest from 'RegisterTest';
-import LoginTest from 'LoginTest';
+import NotFound from "Pages/OtherPage/NotFound";
+import AppHeader from "Layout/AppHeader";
+import AppSidebar from "Layout/AppSidebar";
+import SiteHeader from "components/Header/SiteHeader";
+import AppLayout from "Layout/AppLayout";
+import { Calendar, Users } from "lucide-react";
+import SiteLayout from "Layout/SiteLayout";
+import DashbordHome from "Pages/Dashboard/DashbordHome";
 
 function App() {
   return (
@@ -55,13 +53,8 @@ function App() {
         <Router>
           <ScrollToTop />
           <Routes>
-
             {/*  website */}
             <Route element={<SiteHeader />}>
-            <Route path="/register-test" element={<RegisterTest />} />
-            <Route path="/login-test" element={<LoginTest />} />
-
-            
               <Route index path="/" element={<Home />} />
               <Route path="/about" element={<AboutUs />} />
               <Route path="/contact" element={<ContactUs />} />
@@ -72,11 +65,10 @@ function App() {
             {/* Adminpanel layout*/}
             {/* <Route element={<SiteLayout />}> */}
             <Route element={<AppLayout />}>
-            
-            <Route index path="/" element={< DashbordHome/>} /> 
-            <Route path="users" element={<Users />} />
-            <Route path="/admin" element={<AppSidebar/>}/>
-            <Route path="/calendar" element={<Calendar />} />
+              <Route index path="/" element={<DashbordHome />} />
+              <Route path="users" element={<Users />} />
+              <Route path="/admin" element={<AppSidebar />} />
+              <Route path="/calendar" element={<Calendar />} />
               <Route path="panel" element={<AdminPanel />} />
               <Route path="profile" element={<UserProfiles />} />
               <Route path="blank" element={<Blank />} />
@@ -99,7 +91,6 @@ function App() {
 
             {/*  page 404 */}
             <Route path="*" element={<NotFound />} />
-
           </Routes>
         </Router>
       </HelmetProvider>

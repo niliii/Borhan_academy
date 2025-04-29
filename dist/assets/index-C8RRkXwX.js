@@ -23377,15 +23377,13 @@ A$1({
   },
   Defs: {
     pattern: K$1(function (ln, an, rn) {
-      return this.put(new ce())
-        .update(rn)
-        .attr({
-          x: 0,
-          y: 0,
-          width: ln,
-          height: an,
-          patternUnits: "userSpaceOnUse",
-        });
+      return this.put(new ce()).update(rn).attr({
+        x: 0,
+        y: 0,
+        width: ln,
+        height: an,
+        patternUnits: "userSpaceOnUse",
+      });
     }),
   },
 }),
@@ -39937,13 +39935,11 @@ var Li = (function () {
                     updateRot: function () {},
                     createHandle: function (dn, pn, fn, mn, xn) {
                       return xn === "l" || xn === "r"
-                        ? dn
-                            .circle(8)
-                            .css({
-                              "stroke-width": 1,
-                              stroke: "#333",
-                              fill: "#fff",
-                            })
+                        ? dn.circle(8).css({
+                            "stroke-width": 1,
+                            stroke: "#333",
+                            fill: "#fff",
+                          })
                         : dn.circle(0);
                     },
                     updateHandle: function (dn, pn) {
@@ -46873,15 +46869,13 @@ var Li = (function () {
               })),
               an.forEach(function (jn, Mn) {
                 var Tn = jn.length === sn.globals.dataPoints,
-                  Nn = rn.graphics
-                    .group()
-                    .attr({
-                      class: "apexcharts-series",
-                      "data:longestSeries": Tn,
-                      seriesName: v$2.escapeString(sn.globals.seriesNames[Mn]),
-                      rel: Mn + 1,
-                      "data:realIndex": Mn,
-                    });
+                  Nn = rn.graphics.group().attr({
+                    class: "apexcharts-series",
+                    "data:longestSeries": Tn,
+                    seriesName: v$2.escapeString(sn.globals.seriesNames[Mn]),
+                    rel: Mn + 1,
+                    "data:realIndex": Mn,
+                  });
                 (rn.dataRadiusOfPercent[Mn] = []),
                   (rn.dataRadius[Mn] = []),
                   (rn.angleArr[Mn] = []),
@@ -75870,7 +75864,7 @@ const AppHeader = () => {
                         jsxRuntimeExports.jsx("input", {
                           ref: pn,
                           type: "text",
-                          placeholder: "Search or type command...",
+                          placeholder: "جستجو بر اساس نام یا ایمیل...",
                           className:
                             "dark:bg-dark-900 h-11 w-full rounded-lg border border-gray-200 bg-transparent py-2.5 pl-12 pr-14 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-800 dark:bg-gray-900 dark:bg-white/[0.03] dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800 xl:w-[430px]",
                         }),
@@ -78502,11 +78496,9 @@ function requireJquery() {
                       $r > 1 && Rd(Jr),
                       $r > 1 &&
                         Fu(
-                          $n
-                            .slice(0, $r - 1)
-                            .concat({
-                              value: $n[$r - 2].type === " " ? "*" : "",
-                            })
+                          $n.slice(0, $r - 1).concat({
+                            value: $n[$r - 2].type === " " ? "*" : "",
+                          })
                         ).replace(nr, "$1"),
                       pr,
                       $r < mr && Yu($n.slice($r, mr)),
@@ -88892,14 +88884,12 @@ function App() {
     }),
   });
 }
-clientExports
-  .createRoot(document.getElementById("root"))
-  .render(
-    jsxRuntimeExports.jsx(reactExports.StrictMode, {
-      children: jsxRuntimeExports.jsx(ThemeProvider, {
-        children: jsxRuntimeExports.jsx(AppWrapper, {
-          children: jsxRuntimeExports.jsx(App, {}),
-        }),
+clientExports.createRoot(document.getElementById("root")).render(
+  jsxRuntimeExports.jsx(reactExports.StrictMode, {
+    children: jsxRuntimeExports.jsx(ThemeProvider, {
+      children: jsxRuntimeExports.jsx(AppWrapper, {
+        children: jsxRuntimeExports.jsx(App, {}),
       }),
-    })
-  );
+    }),
+  })
+);
