@@ -46,7 +46,7 @@ export default function SignInForm() {
       localStorage.setItem("token", token); // یا ذخیره در Zustand
       console.log("Login success:", token);
       // setToken(token); 
-      navigate("/Dashbord");
+      navigate("/panel");
     } catch (error) {
       console.error("Login error:", error);
       alert("نام کاربری یا رمز عبور اشتباه است.");

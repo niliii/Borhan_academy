@@ -12,6 +12,8 @@ const AppHeader: React.FC = () => {
   const [isApplicationMenuOpen, setApplicationMenuOpen] = useState(false);
 
   const { isMobileOpen, toggleSidebar, toggleMobileSidebar } = useSidebar();
+  const [searchTerm, setSearchTerm] = useState("");
+
 
   const handleToggle = () => {
     if (window.innerWidth >= 1024) {
@@ -36,6 +38,7 @@ const AppHeader: React.FC = () => {
     };
 
     document.addEventListener("keydown", handleKeyDown);
+    
 
     return () => {
       document.removeEventListener("keydown", handleKeyDown);

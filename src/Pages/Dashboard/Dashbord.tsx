@@ -1,10 +1,11 @@
-import { useEffect } from "react";
-import { useUserStore } from "../store/useUserStore";
-import { AccountAPI } from "../services/api"; // مسیر رو بسته به ساختار پروژه‌ات تنظیم کن
+import { useEffect, useState } from "react";
+import { AccountAPI } from "API/api"; 
+import { useUserStore } from "store/useUserStore";
 
 const UsersPage = () => {
   const users = useUserStore((state) => state.users);
   const setUsers = useUserStore((state) => state.setUsers);
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     const fetchUsers = async () => {
