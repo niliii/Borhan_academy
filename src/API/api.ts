@@ -9,8 +9,9 @@ const api = axios.create({
 });
 
 
+
 api.interceptors.request.use((config) => {
-  const token = localStorage.getItem("token"); 
+  const token = localStorage.getItem("token");
   if (token && config.headers) {
     config.headers.Authorization = `Bearer ${token}`;
   }
@@ -18,11 +19,15 @@ api.interceptors.request.use((config) => {
 });
 
 export const AccountAPI = {
-  
   login: (data: { username: string; password: string }) =>
     api.post("/Account/token", data),
 
-  
+  addUserLesson: (data: { userId: number; lessonId: number }) =>
+    api.post("/UserLesson/Add", data),
+
+  getUserLessons: (userId: number) =>
+    api.get(`/UserLesson/GetUserLessons/${userId}`),
+
   register: (data: {
     name: string;
     email: string;
@@ -31,4 +36,5 @@ export const AccountAPI = {
   }) => api.post("/Account/Register", data),
 
   getAllUsers: () => api.get("/Account/GetAllUsers"),
+  deleteUser: (id: number) => api.delete(`/Account/DeleteUser/${id}`),
 };
