@@ -32,6 +32,8 @@ export default function SignInForm() {
   //const setUser = useUserStore((state) => state.setUsers);
   // const navigate = useNavigate();
 
+  
+
   const handleLogin = async () => {
     // اینجا فرض می‌کنیم لاگین موفق بوده
     // const fakeUser = {
@@ -81,7 +83,9 @@ export default function SignInForm() {
         <div className="mb-8 text-center">
           <h1 className="mb-2 text-2xl font-bold text-gray-800 dark:text-white">
             ورود به حساب
+            
           </h1>
+          
           <p className="text-sm text-gray-600 dark:text-gray-300">
             ایمیل و رمز عبور خود را وارد کنید
           </p>
@@ -124,7 +128,9 @@ export default function SignInForm() {
             <Input
               onChange={(e) => setUsername(e.target.value)}
               placeholder="نیلوفر ابراهیمی"
+              
             />
+            
           </div>
 
           <div>

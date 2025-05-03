@@ -12,17 +12,22 @@ type User = {
   email: string;
   token: string;
 };
+type UserLesson = {
+  lessonId: number;
+  lessonName: string;
+};
 
 interface UserStore {
   token: string | null;
   user: {
+    id: { username: string; } | null;
     username: string;
   } | null;
   users: User[];
-  userLessons: Lesson[];
+  userLessons: UserLesson[];
   setUserLessons: (lessons: Lesson[]) => void;
-  addUserLesson: (lesson: Lesson) => void;
-  removeUserLesson: (id: number) => void;
+  addUserLesson: (lesson: UserLesson) => void;
+  removeUserLesson: (lessonId: number) => void;
   setToken: (token: string) => void;
   setUser: (user: any) => void;
   logout: () => void;
@@ -45,12 +50,20 @@ export const useUserStore = create<UserStore>((set) => ({
   setUsers: (users) => set({ users }),
   clearUsers: () => set({ users: [] }),
 
-  setUserLessons: (lessons) => set({ userLessons: lessons }),
+  setUserLessons: (lessons) =>
+    set({
+      userLessons: lessons.map((lesson) => ({
+        lessonId: lesson.id,
+        lessonName: lesson.title,
+      })),
+    }),
   addUserLesson: (lesson) =>
     set((state) => ({ userLessons: [...state.userLessons, lesson] })),
-  removeUserLesson: (id) =>
+  removeUserLesson: (lessonId) =>
     set((state) => ({
-      userLessons: state.userLessons.filter((l) => l.id !== id),
+      userLessons: state.userLessons.filter(
+        (lesson) => lesson.lessonId !== lessonId
+      ),
     })),
   removeUser: (id) =>
     set((state) => ({
