@@ -8,9 +8,8 @@ interface UserLessonsProps {
 const UserLessons = ({ userId }: UserLessonsProps) => {
   const [userLessons, setUserLessons] = useState<any[]>([]);
   const [lessonId, setLessonId] = useState<number>(0);
-  const [allLessons, setAllLessons] = useState<any[]>([]); // فرض بر این است که لیست درسی وجود دارد
+  const [allLessons, setAllLessons] = useState<any[]>([]);
 
-  // دریافت کلاس‌های انتخاب‌شده
   const fetchUserLessons = async () => {
     try {
       const res = await AccountAPI.getUserLessons(userId);
@@ -20,21 +19,19 @@ const UserLessons = ({ userId }: UserLessonsProps) => {
     }
   };
 
-  // افزودن کلاس
   const handleAddLesson = async () => {
     if (!lessonId) return;
     try {
       await AccountAPI.addUserLesson({ userId, lessonId });
-      fetchUserLessons(); // آپدیت لیست پس از افزودن
+      fetchUserLessons();
     } catch (error) {
       console.error("خطا در افزودن کلاس:", error);
     }
   };
 
-  // فرض: گرفتن لیست تمام کلاس‌ها برای نمایش در Dropdown
   const fetchAllLessons = async () => {
     try {
-      const res = await AccountAPI.getAllLessons(); // باید این متد را در API بسازی
+      const res = await AccountAPI.getAllLessons(); 
       setAllLessons(res.data);
     } catch (error) {
       console.error("خطا در دریافت لیست دروس:", error);

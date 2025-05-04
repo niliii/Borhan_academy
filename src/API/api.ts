@@ -27,9 +27,9 @@ export const AccountAPI = {
 
   addUserLesson: (data: { userId: number; lessonId: number }) =>
     api.post("/UserLesson/Add", data),
-
-  getUserLessons: (user: { id: { username: string; } | null; username: string; }, Number: NumberConstructor, userId: number) =>
-    api.get(`/UserLesson/GetUserLessons/${userId}`),
+  getUserLessons: (userId: number) =>
+    api.get(`/api/UserLesson/Add/${userId}`),
+  
 
   register: (data: {
     name: string;
@@ -38,8 +38,9 @@ export const AccountAPI = {
     confirmPassword: string;
   }) => api.post("/Account/Register", data),
 
-  getAllUsers: () => api.get("/Account/GetAllUsers"),
-  getAllLessons: () => api.get("/Account/getAllLessons"),
+  getAllUsers: () => api.get("/api/Account/GetAllUsers"),
+  getAllLessons: () => api.get("/api/UserLesson/GetUserLessons"),
   deleteUser: (id: number) => api.delete(`/Account/DeleteUser/${id}`),
+  removeUserLesson: (userId: number, lessonId: number) => axios.post("/api/UserLesson/Remove", { userId, lessonId }), 
   
 };

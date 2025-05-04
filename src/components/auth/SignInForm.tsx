@@ -9,8 +9,10 @@ import { useUserStore } from "store/useUserStore";
 import { AccountAPI } from "../../API/api";
 
 
+
 export default function SignInForm() {
   // const { setToken } = useAuthStore();
+  const setUser = useUserStore((state) => state.setUser);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
@@ -35,20 +37,22 @@ export default function SignInForm() {
   
 
   const handleLogin = async () => {
-    // اینجا فرض می‌کنیم لاگین موفق بوده
-    // const fakeUser = {
-    //   email: "test@example.com",
-    //   token: "123456789"
-    // };
-    // setUser(fakeUser );
-    // navigate("/admin-panel");
+  
     try {
       const response = await AccountAPI.login({ username, password });
       const token = response.data.token;
-      localStorage.setItem("token", token); // یا ذخیره در Zustand
+      
+      localStorage.setItem("token", response.data.token);
       console.log("Login success:", token);
-      // setToken(token); 
+      setUser({
+        id: response.data.id,
+        name: response.data.name || "",
+        username: response.data.username,
+        email: response.data.email || "",
+        token: response.data.token,
+      });
       navigate("/panel");
+
     } catch (error) {
       console.error("Login error:", error);
       alert("نام کاربری یا رمز عبور اشتباه است.");
@@ -70,7 +74,6 @@ export default function SignInForm() {
       </button>
 
       <div className="w-full max-w-md rounded-2xl backdrop-blur-md bg-gray-200/30 dark:bg-gray-700/30 shadow-xl p-6 sm:p-10">
-        {/* برگشت */}
         <Link
           to="/"
           className="inline-flex items-center mb-6 text-sm text-gray-600 transition-colors hover:text-gray-800 dark:text-gray-300 dark:hover:text-white"
@@ -79,7 +82,6 @@ export default function SignInForm() {
           برگشت به صفحه قبل
         </Link>
 
-        {/* عنوان */}
         <div className="mb-8 text-center">
           <h1 className="mb-2 text-2xl font-bold text-gray-800 dark:text-white">
             ورود به حساب
@@ -91,7 +93,6 @@ export default function SignInForm() {
           </p>
         </div>
 
-        {/* دکمه‌های شبکه اجتماعی */}
         <div className="grid grid-cols-1 gap-3 mb-6 justify-center">
           <button className="flex items-center justify-center gap-3 py-3 text-sm font-medium transition-colors bg-white rounded-lg shadow-sm px-5 hover:bg-gray-100 dark:bg-white/10 dark:text-white dark:hover:bg-white/20">
             ورود با گوگل
@@ -101,7 +102,6 @@ export default function SignInForm() {
         {/* <button className="flex items-center justify-center gap-3 py-3 text-sm font-medium transition-colors bg-white rounded-lg shadow-sm px-5 hover:bg-gray-100 dark:bg-white/10 dark:text-white dark:hover:bg-white/20">
           ورود با اکس
         </button> */}
-        {/* جداکننده */}
         <div className="relative py-5">
           <div className="absolute inset-0 flex items-center">
             <div className="w-full border-t border-gray-300 dark:border-gray-600" />
@@ -113,7 +113,6 @@ export default function SignInForm() {
           </div>
         </div>
 
-        {/* فرم ورود */}
         <form
           onSubmit={(e) => {
             e.preventDefault();

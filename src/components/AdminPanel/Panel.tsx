@@ -81,6 +81,7 @@ import RecentOrders from "../../components/ecommerce/RecentOrders";
 import DemographicCard from "../../components/ecommerce/DemographicCard";
 import PageMeta from "../../components/common/PageMeta";
 import Cours from "Pages/Cours";
+import UserLessons from "Pages/UserLessons";
 
 export default function DashbordHome() {
   return (
@@ -93,6 +94,7 @@ export default function DashbordHome() {
         <div className="col-span-12 space-y-6 xl:col-span-7">
           {/* <EcommerceMetrics /> */}
          <Cours/>
+         <UserLessons userId={0} />
           <MonthlySalesChart />
         </div>
 

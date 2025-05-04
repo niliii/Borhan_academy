@@ -11,6 +11,7 @@ type User = {
   name: string;
   email: string;
   token: string;
+  username: string;
 };
 type UserLesson = {
   lessonId: number;
@@ -19,17 +20,14 @@ type UserLesson = {
 
 interface UserStore {
   token: string | null;
-  user: {
-    id: { username: string; } | null;
-    username: string;
-  } | null;
+  user: User | null;
   users: User[];
   userLessons: UserLesson[];
   setUserLessons: (lessons: Lesson[]) => void;
   addUserLesson: (lesson: UserLesson) => void;
   removeUserLesson: (lessonId: number) => void;
   setToken: (token: string) => void;
-  setUser: (user: any) => void;
+  setUser: (user: User) => void;
   logout: () => void;
   addUser: (user: User) => void;
   setUsers: (users: User[]) => void;
