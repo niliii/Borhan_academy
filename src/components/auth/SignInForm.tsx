@@ -44,14 +44,14 @@ export default function SignInForm() {
       
       localStorage.setItem("token", response.data.token);
       console.log("Login success:", token);
-      setUser({
-        id: response.data.id,
-        name: response.data.name || "",
-        username: response.data.username,
-        email: response.data.email || "",
-        token: response.data.token,
-      });
-      navigate("/panel");
+      // setUser({
+      //   id: response.data.id,
+      //   name: response.data.name || "",
+      //   username: response.data.username,
+      //   email: response.data.email || "",
+      //   token: response.data.token,
+      // });
+      // navigate("/panel");
 
     } catch (error) {
       console.error("Login error:", error);
@@ -134,13 +134,13 @@ export default function SignInForm() {
 
           <div>
             <Label>
-              رمز عبور <span className="text-red-500">*</span>
+              کد ملی  <span className="text-red-500">*</span>
             </Label>
             <div className="relative">
               <Input
                 onChange={(e) => setPassword(e.target.value)}
                 type={showPassword ? "text" : "password"}
-                placeholder="رمز عبور را وارد کنید"
+                placeholder="کد ملی خود را وارد کنید"
               />
               <span
                 onClick={() => setShowPassword(!showPassword)}

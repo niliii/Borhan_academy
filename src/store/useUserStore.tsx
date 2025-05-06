@@ -7,6 +7,9 @@ type Lesson = {
 };
 
 type User = {
+  fullName: string;
+  mobile: string;
+  nationalCode: string;
   id: number;
   name: string;
   email: string;

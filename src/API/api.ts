@@ -22,6 +22,7 @@ api.interceptors.request.use((config) => {
 
 export const AccountAPI = {
   
+  
   login: (data: { username: string; password: string }) =>
     api.post("/Account/token", data),
 
@@ -35,7 +36,7 @@ export const AccountAPI = {
     name: string;
     email: string;
     password: string;
-    confirmPassword: string;
+    // confirmPassword: string;
   }) => api.post("/Account/Register", data),
 
   getAllUsers: () => api.get("/api/Account/GetAllUsers"),

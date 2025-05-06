@@ -1,16 +1,87 @@
-// 'use client';
-
-import { useState, useEffect, useRef } from "react";
-
+import { useState, useRef, useEffect, FormEvent, ChangeEvent } from "react";
 import "tailwindcss/tailwind.css";
 import img11 from "../assets/Images/img11.jpg";
 import img12 from "../assets/Images/img12.jpg";
 import img22 from "../assets/Images/img22.jpg";
 import Teachers from "./Teachers";
-type FooterProps = {
+import React from "react";
+
+// type FooterProps = {
+//   title: string;
+//   img11: string;
+// };
+interface Slide {
+  src: string;
   title: string;
-  img11: string;
+  description: string;
+}
+
+interface Stat {
+  number: string;
+  label: string;
+}
+
+interface Month {
+  name: string;
+  color: string;
+}
+
+interface Advisor {
+  name: string;
+  day: string;
+  time: string;
+  img: string;
+}
+// const handleSubmit = async (e: React.FormEvent) => {
+//   e.preventDefault();
+// };
+function isValidIranianNationalCode(input: string): boolean {
+  if (!/^\d{10}$/.test(input)) return false;
+  const check = +input[9];
+  const sum = [...input].slice(0, 9).reduce((acc, digit, i) => acc + (+digit * (10 - i)), 0);
+  const remainder = sum % 11;
+  return (remainder < 2 && check === remainder) || (remainder >= 2 && check === 11 - remainder);
+}
+
+
+const useSignUpForm = () => {
+  
+  
+  
+  const [nationalCode, setNationalCode] = useState("");
+  const [error, setError] = useState("");
+  
+  const [formData, setFormData] = useState({
+    fullName: "",
+    mobile: "",
+    nationalCode: "",
+  });
+  
+
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    console.log("Sending Data:", formData);
+    
+  };
+  if (!isValidIranianNationalCode(formData.nationalCode)) {
+      setError("کد ملی وارد شده معتبر نیست.");
+      return;
+    }
+
+    setError("");
+    console.log("کد ملی معتبر است:", formData.nationalCode);
+    console.log("Sending Data:", formData);
+  
+
+  return { formData, handleChange, handleSubmit };
 };
+
+
 const Carousel = () => {
   const slides = [
     {
@@ -168,17 +239,18 @@ const OnlineClasses = () => {
     </section>
   );
 };
-const RegistrationSection = () => {
+export const RegistrationSection = () => {
+  
+  
+  
   return (
     <section className="relative w-full py-16 bg-gray-900 text-white">
-      {/* تصویر پس‌زمینه */}
       <div
         className="absolute inset-0 bg-cover bg-center opacity-40"
         style={{ backgroundImage: "url('./assets/images/rigister.jpg')" }}
       ></div>
 
       <div className="relative container mx-auto px-6 lg:px-12 flex flex-col lg:flex-row items-center">
-        {/* بخش توضیحات و آمار */}
         <div className="lg:w-2/3 text-center lg:text-left space-y-6">
           <h2 className="text-3xl lg:text-4xl font-bold">
             بیش از 1000 دانش‌پذیر حقوقی
@@ -188,8 +260,6 @@ const RegistrationSection = () => {
             حقوقی، وکالت و قضاوت توانسته است دانش‌پذیران بسیاری را با سطح علمی
             بالا به جامعه ارائه دهد.
           </p>
-
-          {/* بخش آمار */}
           <div className="flex flex-wrap justify-center lg:justify-start gap-6 mt-6">
             {[
               { number: "6+", label: "اساتید" },
@@ -205,8 +275,6 @@ const RegistrationSection = () => {
             ))}
           </div>
         </div>
-
-        {/* فرم ثبت‌نام */}
         <div className="lg:w-1/3 bg-white text-gray-900 p-6 lg:p-8 rounded-2xl shadow-xl mt-10 lg:mt-0">
           <h3 className="text-xl font-semibold text-center text-blue-600">
             همین الان ثبت نام کنید
@@ -215,22 +283,27 @@ const RegistrationSection = () => {
             فرم زیر را پر کنید، ما در اسرع وقت با شما تماس خواهیم گرفت.
           </p>
 
-          <form className="mt-6 space-y-4">
+          <form  className="mt-6 space-y-4">
             <input
               type="text"
               placeholder="نام و نام خانوادگی"
               className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
             />
             <input
+              // value={formData.fullName}
+              //  onChange={handleChange}
               type="text"
               placeholder="شماره موبایل"
               className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
             />
             <input
+            //  value={nationalCode}
+            //  onChange={(e) => setNationalCode(e.target.value)}
               type="text"
               placeholder="کد ملی"
               className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
             />
+                {/* {Error && <p className="text-red-600">{Error}</p>} */}
             <button className="w-full bg-blue-500 hover:bg-blue-600 text-white py-3 rounded-lg font-semibold transition-all">
               ثبت نام
             </button>
@@ -315,8 +388,18 @@ const AdvisorsSection = () => {
       time: "۱۵ تا ۲۰",
       img: "/assets/Images/BestAvatar/7.jpg",
     },
-    { name: "رضا علوی", day: "دوشنبه", time: "۱۴ تا ۱۸", img: "/assets/Images/BestAvatar/5.jpg" },
-    { name: "زهرا محمدی", day: "شنبه", time: "۱۳ تا ۱۷", img: "/assets/Images/BestAvatar/6.jpg" },
+    {
+      name: "رضا علوی",
+      day: "دوشنبه",
+      time: "۱۴ تا ۱۸",
+      img: "/assets/Images/BestAvatar/5.jpg",
+    },
+    {
+      name: "زهرا محمدی",
+      day: "شنبه",
+      time: "۱۳ تا ۱۷",
+      img: "/assets/Images/BestAvatar/6.jpg",
+    },
   ];
 
   return (
@@ -350,7 +433,6 @@ const AdvisorsSection = () => {
             </svg>
           </button>
 
-          {/* لیست مشاوران با اسکرول افقی */}
           <div
             ref={scrollRef}
             className="overflow-x-auto scrollbar-hide flex gap-6 px-12 w-full max-w-4xl no-scrollbar"
@@ -381,7 +463,6 @@ const AdvisorsSection = () => {
             ))}
           </div>
 
-          {/* دکمه اسکرول راست */}
           <button
             onClick={() => scroll("right")}
             className="absolute right-2 z-10 bg-white shadow-md p-2 rounded-full"
@@ -458,9 +539,6 @@ const data = [
   },
 ];
 
-
-
-
 const HonorsSlider: React.FC = () => {
   const [index, setIndex] = useState(0);
   const intervalTime = 4000;
@@ -481,7 +559,10 @@ const HonorsSlider: React.FC = () => {
         <div
           ref={sliderRef}
           className="flex transition-transform duration-500 ease-in-out"
-          style={{ transform: `translateX(-${index * 320}px)`, width: `${data.length * 320}px` }}
+          style={{
+            transform: `translateX(-${index * 320}px)`,
+            width: `${data.length * 320}px`,
+          }}
         >
           {data.map((item, idx) => (
             <div
@@ -517,66 +598,6 @@ const HonorsSlider: React.FC = () => {
     </div>
   );
 };
-// const HonorsSlider2 = () => {
-//   const [index, setIndex] = useState(0);
-//   const intervalTime = 4000;
-//   const sliderRef = useRef(null);
-
-//   useEffect(() => {
-//     const interval = setInterval(() => {
-//       setIndex((prevIndex) => (prevIndex + 1) % data.length);
-
-//       if (sliderRef.current) {
-//         // sliderRef.current.scrollLeft += 300;
-//       }
-//     }, intervalTime);
-
-//     return () => clearInterval(interval);
-//   }, []);
-
-//   return (
-//     <div className="relative w-full overflow-hidden bg-gray-100 p-6 rounded-lg">
-//       <h2 className="text-2xl font-bold text-center mb-6">تالار افتخارات</h2>
-//       <div className="flex justify-center items-center no-scrollbar1">
-//         <div
-//           ref={sliderRef}
-//           className="w-full overflow-x-auto flex space-x-4 pb-4 "
-//         >
-//           {data.map((item, idx) => (
-//             <div
-//               key={idx}
-//               className="flex-none w-[300px] bg-white shadow-lg p-4 rounded-lg flex items-center space-x-4 "
-//             >
-//               <img
-//                 src={item.img}
-//                 alt={item.name}
-//                 className="w-16 h-16 rounded-full object-cover "
-//               />
-//               <div>
-//                 <h3 className="text-lg font-semibold text-orange-600">
-//                   {item.name}
-//                 </h3>
-//                 <p className="text-sm text-gray-500">{item.rank}</p>
-//               </div>
-//             </div>
-//           ))}
-//         </div>
-//       </div>
-//       <div className="flex justify-center mt-4 space-x-2">
-//         {data.map((_, idx) => (
-//           <button
-//             key={idx}
-//             onClick={() => setIndex(idx)}
-//             className={`w-3 h-3 rounded-full transition-all ${
-//               idx === index ? "bg-orange-500 w-4" : "bg-gray-300"
-//             }`}
-//           />
-//         ))}
-//       </div>
-//     </div>
-//   );
-// };
-
 const items = [
   { img: "/akhbar.png", link: "#" },
   { img: "/akhbar.png", link: "#" },
@@ -590,9 +611,6 @@ const items = [
 
   { img: "/akhbar.png", link: "#" },
 ];
-// const HorizontalScroll = () => {
-//   const scrollRef = useRef<HTMLDivElement>(null);
-
 const HorizontalScroll = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -615,7 +633,6 @@ const HorizontalScroll = () => {
         جدیدترین مطالب
       </h2>
 
-      {/* دکمه‌های اسکرول */}
       <button
         className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white p-3 rounded-full shadow-lg transition-all duration-300 hover:bg-gray-900 hover:scale-110"
         onClick={() => scroll("left")}
@@ -628,10 +645,6 @@ const HorizontalScroll = () => {
       >
         ▶
       </button>
-
-      
-
-      {/* اسکرول افقی */}
       <div
         ref={scrollRef}
         className="flex space-x-6 overflow-x-auto no-scrollbar px-12 scroll-container "
@@ -670,9 +683,9 @@ export default function Home() {
       <RegistrationSection />
       <CalendarSection />
       <AdvisorsSection />
-      <Teachers/>
+      <Teachers />
       <HonorsSlider />
-   
+
       <HorizontalScroll />
     </>
   );
