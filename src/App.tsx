@@ -88,7 +88,7 @@ function App() {
             {/* login logout*/}
             <Route path="/signin" element={<SignIn />} />
             <Route path="/signup" element={<SignUp />} />
-            <Route path="/signinform" element={<SignInForm />} />
+            <Route path="/signinform" element={<SignInForm/>} />
 
             {/*  page 404 */}
             <Route path="*" element={<NotFound />} />

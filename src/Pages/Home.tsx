@@ -5,6 +5,7 @@ import img12 from "../assets/Images/img12.jpg";
 import img22 from "../assets/Images/img22.jpg";
 import Teachers from "./Teachers";
 import React from "react";
+import Registration from "./Registration";
 
 // type FooterProps = {
 //   title: string;
@@ -35,50 +36,12 @@ interface Advisor {
 // const handleSubmit = async (e: React.FormEvent) => {
 //   e.preventDefault();
 // };
-function isValidIranianNationalCode(input: string): boolean {
-  if (!/^\d{10}$/.test(input)) return false;
-  const check = +input[9];
-  const sum = [...input].slice(0, 9).reduce((acc, digit, i) => acc + (+digit * (10 - i)), 0);
-  const remainder = sum % 11;
-  return (remainder < 2 && check === remainder) || (remainder >= 2 && check === 11 - remainder);
-}
 
 
 const useSignUpForm = () => {
   
   
   
-  const [nationalCode, setNationalCode] = useState("");
-  const [error, setError] = useState("");
-  
-  const [formData, setFormData] = useState({
-    fullName: "",
-    mobile: "",
-    nationalCode: "",
-  });
-  
-
-
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault();
-    console.log("Sending Data:", formData);
-    
-  };
-  if (!isValidIranianNationalCode(formData.nationalCode)) {
-      setError("کد ملی وارد شده معتبر نیست.");
-      return;
-    }
-
-    setError("");
-    console.log("کد ملی معتبر است:", formData.nationalCode);
-    console.log("Sending Data:", formData);
-  
-
-  return { formData, handleChange, handleSubmit };
 };
 
 
@@ -239,80 +202,8 @@ const OnlineClasses = () => {
     </section>
   );
 };
-export const RegistrationSection = () => {
-  
-  
-  
-  return (
-    <section className="relative w-full py-16 bg-gray-900 text-white">
-      <div
-        className="absolute inset-0 bg-cover bg-center opacity-40"
-        style={{ backgroundImage: "url('./assets/images/rigister.jpg')" }}
-      ></div>
 
-      <div className="relative container mx-auto px-6 lg:px-12 flex flex-col lg:flex-row items-center">
-        <div className="lg:w-2/3 text-center lg:text-left space-y-6">
-          <h2 className="text-3xl lg:text-4xl font-bold">
-            بیش از 1000 دانش‌پذیر حقوقی
-          </h2>
-          <p className="text-lg text-gray-300 leading-relaxed">
-            گروه آموزشی برهان با بیشترین درصد قبولی در سال‌های اخیر در آزمون‌های
-            حقوقی، وکالت و قضاوت توانسته است دانش‌پذیران بسیاری را با سطح علمی
-            بالا به جامعه ارائه دهد.
-          </p>
-          <div className="flex flex-wrap justify-center lg:justify-start gap-6 mt-6">
-            {[
-              { number: "6+", label: "اساتید" },
-              { number: "1000+", label: "دانش‌پذیر" },
-              { number: "90%+", label: "قبولی" },
-            ].map((stat, index) => (
-              <div key={index} className="flex flex-col items-center">
-                <div className="w-24 h-24 flex items-center justify-center border-4 border-blue-500 rounded-full text-2xl font-bold">
-                  {stat.number}
-                </div>
-                <p className="mt-2 text-sm text-gray-300">{stat.label}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-        <div className="lg:w-1/3 bg-white text-gray-900 p-6 lg:p-8 rounded-2xl shadow-xl mt-10 lg:mt-0">
-          <h3 className="text-xl font-semibold text-center text-blue-600">
-            همین الان ثبت نام کنید
-          </h3>
-          <p className="text-sm text-gray-600 text-center mt-2">
-            فرم زیر را پر کنید، ما در اسرع وقت با شما تماس خواهیم گرفت.
-          </p>
 
-          <form  className="mt-6 space-y-4">
-            <input
-              type="text"
-              placeholder="نام و نام خانوادگی"
-              className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
-            />
-            <input
-              // value={formData.fullName}
-              //  onChange={handleChange}
-              type="text"
-              placeholder="شماره موبایل"
-              className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
-            />
-            <input
-            //  value={nationalCode}
-            //  onChange={(e) => setNationalCode(e.target.value)}
-              type="text"
-              placeholder="کد ملی"
-              className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
-            />
-                {/* {Error && <p className="text-red-600">{Error}</p>} */}
-            <button className="w-full bg-blue-500 hover:bg-blue-600 text-white py-3 rounded-lg font-semibold transition-all">
-              ثبت نام
-            </button>
-          </form>
-        </div>
-      </div>
-    </section>
-  );
-};
 const CalendarSection = () => {
   const months = [
     { name: "مهر", color: "bg-orange-500" },
@@ -680,7 +571,7 @@ export default function Home() {
       <Carousel />
       <Section />
       <OnlineClasses />
-      <RegistrationSection />
+      <Registration/>
       <CalendarSection />
       <AdvisorsSection />
       <Teachers />
