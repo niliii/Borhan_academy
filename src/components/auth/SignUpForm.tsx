@@ -1,26 +1,117 @@
-import { useState } from "react";
-import { Link } from "react-router";
+import { ChangeEvent, useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router";
 import Label from "../form/Label";
 import Input from "../form/input/InputField";
 import Checkbox from "../form/input/Checkbox";
 import { ChevronLeftIcon, EyeCloseIcon, EyeIcon } from "components/icons";
+import axios from "axios";
+import { useAuthStore } from "store/auth";
 
+function isValidIranianNationalCode(input: string): boolean {
+  if (!/^\d{10}$/.test(input)) return false;
+  const check = +input[9];
+  const sum = [...input]
+    .slice(0, 9)
+    .reduce((acc, digit, i) => acc + +digit * (10 - i), 0);
+  const remainder = sum % 11;
+  return (
+    (remainder < 2 && check === remainder) ||
+    (remainder >= 2 && check === 11 - remainder)
+  );
+}
 export default function SignUpForm() {
   const [formData, setFormData] = useState({
-    fullName: "",
+    firstName: "",
+    lastName: "",
+    nationCode: "",
+    mobile: "",
     email: "",
-    password: "",
   });
-  const [showPassword, setShowPassword] = useState(false);
+  const [showNationCode, setShowNationCode] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const [error, setError] = useState("");
+      const [success, setSuccess] = useState("");
+      const [nationalCode, setnationalCode] = useState("");
+      const navigate = useNavigate(); 
+
+
+  // const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   setFormData({ ...formData, [e.target.name]: e.target.value });
+  //   console.log("Login success:");
+  // };
+
+  // const handleSubmit = async (e: React.FormEvent) => {
+  //   e.preventDefault();
+  // };
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+  
+    if (!isValidIranianNationalCode(formData.nationCode)) {
+      setError("کد ملی نامعتبر است.");
+      return;
+    }
+  
+    // توجه: استفاده از PascalCase برای فیلدهای ارسال‌شده
+    const registerUser = async () => {
+      const { firstName, lastName, nationCode, mobile, email } = formData;
+      const payload = {
+        firstName,
+        lastName,
+        nationCode,
+        mobile,
+        email,
+      };
+      
+      const res = await axios.post("https://demo-api.darkube.app/api/Account/Register", payload);
+      return res.data;
+    };
+  
+    const loginUser = async (mobile: string, nationCode: string) => {
+      const res = await axios.post("https://demo-api.darkube.app/api/Account/token", {
+        username: mobile,
+        password: nationCode,
+      });
+      return res.data;
+    };
+  
+    try {
+      await registerUser();
+      const tokenResponse = await loginUser(formData.mobile, formData.nationCode);
+      localStorage.setItem("token", tokenResponse.token);
+      navigate("/panel");
+    } catch (error: any) {
+      console.error("خطا در ثبت‌نام یا ورود:", error);
+      if (error.response?.data?.errors) {
+        console.log("پاسخ سرور:", error.response.data);
+        setError("خطای اعتبارسنجی: لطفاً فیلدها را بررسی کنید.");
+      } else {
+        setError("خطایی در ثبت‌نام یا ورود رخ داد.");
+      }
+    }
   };
+  
 
+
+  const [darkMode, setDarkMode] = useState(() => {
+    return localStorage.getItem("theme") === "dark";
+  });
+  // toggle dark mode class
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  }, [darkMode]);
+
+  
+
+  //const setUser = useUserStore((state) => state.setUsers);
+  // const navigate = useNavigate();
   return (
     <div className="flex flex-col flex-1 w-full overflow-y-auto lg:w-1/2 no-scrollbar">
       <div className="w-full max-w-md mx-auto mb-5 sm:pt-10">
@@ -32,10 +123,16 @@ export default function SignUpForm() {
           برگشت به داشبورد
         </Link>
       </div>
+      <button
+        onClick={() => setDarkMode(!darkMode)}
+        className="absolute top-5 right-5 px-3 py-1 text-sm rounded-lg bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white hover:bg-gray-300 dark:hover:bg-gray-600 transition"
+      >
+        {darkMode ? "☀️ روشن" : "🌙 تاریک"}
+      </button>
       <div className="flex flex-col justify-center flex-1 w-full max-w-md mx-auto">
         <div>
           <div className="mb-5 sm:mb-8">
-            <h1 className="mb-2 font-semibold text-gray-800 text-title-sm dark:text-white/90 sm:text-title-md">
+            <h1 className="mb-2 font-semibold text-black/900 text-title-sm dark:text-white/90 sm:text-title-md">
               ثبت نام
             </h1>
             <p className="text-sm text-gray-500 dark:text-gray-400">
@@ -43,7 +140,7 @@ export default function SignUpForm() {
             </p>
           </div>
           <div>
-            <div className="grid gap-3  sm:gap-5">
+            {/* <div className="grid gap-3  sm:gap-5">
               <button className="inline-flex items-center justify-center gap-3 py-3 text-sm font-normal text-gray-700 transition-colors bg-gray-100 rounded-lg px-7 hover:bg-gray-200 hover:text-gray-800 dark:bg-white/5 dark:text-white/90 dark:hover:bg-white/10">
                 <svg
                   width="20"
@@ -71,14 +168,14 @@ export default function SignUpForm() {
                 </svg>
                 ثبت نام با گوگل
               </button>
-            </div>
+            </div> */}
             <div className="relative py-3 sm:py-5">
               <div className="absolute inset-0 flex items-center">
                 <div className="w-full border-t border-gray-200 dark:border-gray-800"></div>
               </div>
               <div className="relative flex justify-center text-sm">
                 <span className="p-2 text-gray-400 bg-white dark:bg-gray-900 sm:px-5 sm:py-2">
-                  یا
+                 
                 </span>
               </div>
             </div>
@@ -92,8 +189,7 @@ export default function SignUpForm() {
                     </Label>
                     <Input
                       type="text"
-                      id="fname"
-                      name="fname"
+                      name="firstname"
                       placeholder="نام کوچک خود را وارد کنید"
                       className="text-right"
                     />
@@ -103,11 +199,11 @@ export default function SignUpForm() {
                       نام خانوادگی<span className="text-error-500">*</span>
                     </Label>
                     <Input
-                    value={formData.fullName}
+                    value={formData.lastName}
                     onChange={handleChange}
                       type="text"
-                      id="lname"
-                      name="lname"
+                      // id="lname"
+                      name="lastName"
                       placeholder="نام خانوادگی خود را وارد کنید"
                       className="text-right"
                     />
@@ -121,7 +217,7 @@ export default function SignUpForm() {
                    value={formData.email}
                    onChange={handleChange}
                     type="email"
-                    id="email"
+                    // id="email"
                     name="email"
                     placeholder="ایمیل خود را وارد کنید"
                     className="text-right"
@@ -133,17 +229,19 @@ export default function SignUpForm() {
                   </Label>
                   <div className="relative">
                     <Input
-                     value={formData.password}
+                    name="nationCode"
+                     value={formData.nationCode}
                      onChange={handleChange}
                       placeholder="کد ملی خود را وارد کنید"
-                      type={showPassword ? "text" : "password"}
+                      type={showNationCode ? "text" : "nationCode"}
                       className="text-right"
                     />
+                    
                     <span
-                      onClick={() => setShowPassword(!showPassword)}
+                      onClick={() => setShowNationCode(!showNationCode)}
                       className="absolute z-30 -translate-y-1/2 cursor-pointer left-4 top-1/2"
                     >
-                      {showPassword ? (
+                      {showNationCode? (
                         <EyeIcon className="fill-gray-500 dark:fill-gray-400 size-5" />
                       ) : (
                         <EyeCloseIcon className="fill-gray-500 dark:fill-gray-400 size-5" />
